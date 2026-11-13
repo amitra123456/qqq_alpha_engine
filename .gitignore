@@ -1,0 +1,29 @@
+# Byte-compiled / test caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environment variables & secrets (NEVER COMMIT)
+.env
+*.env
+*.env.*
+!.env.example
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Local runtime SQLite state, oversized raw EDGAR JSON dumps, and logs
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/cache/sec_edgar/
+*.log
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

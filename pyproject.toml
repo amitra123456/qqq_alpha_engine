@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qqq-alpha-engine"
+version = "5.0.0"
+description = "Quarterly Point-in-Time Nasdaq-100 Cap-Weighted Basket (Top-8 / Top-16) with QQQ 200-Day Moving Average Cash Rule"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26.0",
+    "pandas>=2.1.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0.1",
+    "statsmodels>=0.14.0",
+    "plotly>=5.18.0",
+    "streamlit>=1.32.0",
+    "yfinance>=0.2.36",
+]

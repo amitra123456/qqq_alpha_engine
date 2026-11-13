@@ -1,0 +1,42 @@
+# ============================================================================
+# QQQ Alpha Engine — Production Strategy Configuration
+# ============================================================================
+# Plain-language rules:
+#   - Quarterly Point-in-Time Nasdaq-100 Cap-Weighted Basket (Top-8 default; Top-16 supported)
+#   - Daily QQQ 200-Day Simple Moving Average cash rule evaluated at completed Close_{t-1}
+#   - When QQQ Close > QQQ 200-Day SMA: 100% cap-weighted PIT basket (let weights drift intra-quarter)
+#   - When QQQ Close <= QQQ 200-Day SMA: 100% US Treasury Bills (SGOV/BIL live; lagged FRED DTB3 backtest)
+#   - Execution: next market open (09:30 ET Open_t); zero TQQQ, zero option collars, zero margin
+# ============================================================================
+
+version: "5.0.0-pit-capweight-ma200"
+strategy_name: "Quarterly Point-in-Time Cap-Weight + QQQ 200-Day Moving Average Cash Rule"
+
+portfolio_rules:
+  default_top_k: 8
+  supported_top_k: [8, 16]
+  weighting_scheme: "market_cap_proportional"
+  reconstitution_cadence: "quarterly"
+  deduplicate_dual_share_classes: true
+  excluded_dual_class_tickers: ["GOOG"]
+  allow_tqqq: false
+  allow_option_collars: false
+  allow_margin: false
+
+trend_filter:
+  signal_symbol: "QQQ"
+  ma_type: "SMA"
+  ma_window_days: 200
+  signal_evaluation: "completed_daily_close"
+  intraday_close_cutoff_et: "16:05"
+  execution_timing: "next_open"
+
+cash_management:
+  live_tbill_etf: "SGOV"
+  fallback_tbill_etf: "BIL"
+  backtest_cash_series: "FRED_DTB3_LAGGED_1D"
+
+friction_model:
+  base_cost_bps: 10.0
+  stress_2x_cost_bps: 20.0
+  stress_3x_cost_bps: 30.0

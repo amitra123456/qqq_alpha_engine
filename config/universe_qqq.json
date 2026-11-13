@@ -1,0 +1,1241 @@
+{
+  "benchmark": "QQQ",
+  "as_of_constituent_date": "2026-11-11",
+  "description": "Point-in-Time Nasdaq-100 Constituent Universe (Dual-Class Deduplicated, Causal Market Cap)",
+  "mega_cap_top8": [
+    {
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "qqq_weight_pct": 13.08,
+      "sector": "Consumer Tech",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA Corp.",
+      "qqq_weight_pct": 10.65,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft Corp.",
+      "qqq_weight_pct": 9.73,
+      "sector": "Enterprise Software",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "name": "Alphabet Inc.",
+      "qqq_weight_pct": 9.05,
+      "sector": "Internet & AI",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "name": "Amazon.com Inc.",
+      "qqq_weight_pct": 7.23,
+      "sector": "Cloud & E-Commerce",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "SPCX",
+      "name": "SpaceX",
+      "qqq_weight_pct": 4.25,
+      "sector": "Telecommunications",
+      "pit_intervals": [
+        [
+          "2026-07-07",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "name": "Broadcom Inc.",
+      "qqq_weight_pct": 4.18,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2015-11-11"
+        ],
+        [
+          "2016-02-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "META",
+      "name": "Meta Platforms Inc.",
+      "qqq_weight_pct": 4.08,
+      "sector": "Internet & AI",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    }
+  ],
+  "alpha_universe": [
+    {
+      "symbol": "TSLA",
+      "name": "Tesla Inc.",
+      "qqq_weight_pct": 3.2,
+      "sector": "Autos & Autonomy",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "WMT",
+      "name": "Walmart",
+      "qqq_weight_pct": 2.51,
+      "sector": "Consumer Discretionary",
+      "pit_intervals": [
+        [
+          "2026-01-20",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MU",
+      "name": "Micron Technology",
+      "qqq_weight_pct": 2.32,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "AMD",
+      "name": "Advanced Micro Devices",
+      "qqq_weight_pct": 2.3,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2018-12-24",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ASML",
+      "name": "ASML Holding",
+      "qqq_weight_pct": 1.52,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2017-12-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "COST",
+      "name": "Costco Wholesale",
+      "qqq_weight_pct": 1.21,
+      "sector": "Consumer Retail",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "PLTR",
+      "name": "Palantir Technologies",
+      "qqq_weight_pct": 1.05,
+      "sector": "Enterprise Software",
+      "pit_intervals": [
+        [
+          "2024-12-23",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CSCO",
+      "name": "Cisco Systems",
+      "qqq_weight_pct": 1.01,
+      "sector": "Networking",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "INTC",
+      "name": "Intel Corp.",
+      "qqq_weight_pct": 0.83,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "AMAT",
+      "name": "Applied Materials",
+      "qqq_weight_pct": 0.8,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "LRCX",
+      "name": "Lam Research",
+      "qqq_weight_pct": 0.75,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "TXN",
+      "name": "Texas Instruments",
+      "qqq_weight_pct": 0.71,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "PANW",
+      "name": "Palo Alto Networks",
+      "qqq_weight_pct": 0.68,
+      "sector": "Cybersecurity",
+      "pit_intervals": [
+        [
+          "2021-12-20",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "NFLX",
+      "name": "Netflix Inc.",
+      "qqq_weight_pct": 0.67,
+      "sector": "Media & Streaming",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "AMGN",
+      "name": "Amgen Inc.",
+      "qqq_weight_pct": 0.63,
+      "sector": "Biotech",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "LIN",
+      "name": "Linde plc",
+      "qqq_weight_pct": 0.61,
+      "sector": "Industrial Gases",
+      "pit_intervals": [
+        [
+          "2024-03-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CRWD",
+      "name": "CrowdStrike Holdings",
+      "qqq_weight_pct": 0.59,
+      "sector": "Cybersecurity",
+      "pit_intervals": [
+        [
+          "2021-08-26",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ARM",
+      "name": "Arm Holdings",
+      "qqq_weight_pct": 0.54,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2024-06-24",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "KLAC",
+      "name": "KLA Corp.",
+      "qqq_weight_pct": 0.53,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2016-02-16"
+        ],
+        [
+          "2016-12-19",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "GILD",
+      "name": "Gilead Sciences",
+      "qqq_weight_pct": 0.53,
+      "sector": "Biotech",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ADI",
+      "name": "Analog Devices",
+      "qqq_weight_pct": 0.5,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "PEP",
+      "name": "PepsiCo Inc.",
+      "qqq_weight_pct": 0.49,
+      "sector": "Consumer Staples",
+      "pit_intervals": [
+        [
+          "2018-07-23",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "QCOM",
+      "name": "Qualcomm Inc.",
+      "qqq_weight_pct": 0.48,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "SHOP",
+      "name": "Shopify",
+      "qqq_weight_pct": 0.48,
+      "sector": "Technology",
+      "pit_intervals": [
+        [
+          "2025-05-19",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "TMUS",
+      "name": "T-Mobile US",
+      "qqq_weight_pct": 0.46,
+      "sector": "Telecom",
+      "pit_intervals": [
+        [
+          "2015-12-21",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ISRG",
+      "name": "Intuitive Surgical",
+      "qqq_weight_pct": 0.39,
+      "sector": "MedTech",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MRVL",
+      "name": "Marvell Technology",
+      "qqq_weight_pct": 0.38,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2020-12-21",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "VRTX",
+      "name": "Vertex Pharmaceuticals",
+      "qqq_weight_pct": 0.35,
+      "sector": "Biotech",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "SNDK",
+      "name": "Sandisk",
+      "qqq_weight_pct": 0.34,
+      "sector": "Technology",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2016-03-16"
+        ],
+        [
+          "2026-04-20",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "APP",
+      "name": "AppLovin Corp.",
+      "qqq_weight_pct": 0.34,
+      "sector": "Internet & AI",
+      "pit_intervals": [
+        [
+          "2024-11-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "STX",
+      "name": "Seagate Technology",
+      "qqq_weight_pct": 0.32,
+      "sector": "Hardware",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2018-12-24"
+        ],
+        [
+          "2025-12-22",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "SBUX",
+      "name": "Starbucks Corp.",
+      "qqq_weight_pct": 0.31,
+      "sector": "Consumer Retail",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ADP",
+      "name": "Automatic Data Processing",
+      "qqq_weight_pct": 0.3,
+      "sector": "FinTech & HR",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "BKNG",
+      "name": "Booking Holdings",
+      "qqq_weight_pct": 0.3,
+      "sector": "Travel Tech",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "WDC",
+      "name": "Western Digital Corp.",
+      "qqq_weight_pct": 0.29,
+      "sector": "Hardware",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2020-10-19"
+        ],
+        [
+          "2025-12-22",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MAR",
+      "name": "Marriott International",
+      "qqq_weight_pct": 0.28,
+      "sector": "Travel Tech",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ABNB",
+      "name": "Airbnb Inc.",
+      "qqq_weight_pct": 0.27,
+      "sector": "Travel Tech",
+      "pit_intervals": [
+        [
+          "2021-12-20",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "PDD",
+      "name": "PDD Holdings",
+      "qqq_weight_pct": 0.26,
+      "sector": "Technology",
+      "pit_intervals": [
+        [
+          "2020-08-24",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CEG",
+      "name": "Constellation Energy",
+      "qqq_weight_pct": 0.25,
+      "sector": "Clean Energy & Power",
+      "pit_intervals": [
+        [
+          "2022-02-02",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MRNA",
+      "name": "Moderna Inc.",
+      "qqq_weight_pct": 0.25,
+      "sector": "Biotech",
+      "pit_intervals": [
+        [
+          "2020-07-20",
+          "2024-12-23"
+        ],
+        [
+          "2026-10-09",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "REGN",
+      "name": "Regeneron Pharma",
+      "qqq_weight_pct": 0.24,
+      "sector": "Biotech",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CSX",
+      "name": "CSX Corp.",
+      "qqq_weight_pct": 0.24,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2016-02-16",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "INTU",
+      "name": "Intuit Inc.",
+      "qqq_weight_pct": 0.24,
+      "sector": "Enterprise Software",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "FTNT",
+      "name": "Fortinet Inc.",
+      "qqq_weight_pct": 0.24,
+      "sector": "Cybersecurity",
+      "pit_intervals": [
+        [
+          "2021-12-20",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ADBE",
+      "name": "Adobe Inc.",
+      "qqq_weight_pct": 0.24,
+      "sector": "Enterprise Software",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CTAS",
+      "name": "Cintas Corp.",
+      "qqq_weight_pct": 0.23,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2016-12-19",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CDNS",
+      "name": "Cadence Design Systems",
+      "qqq_weight_pct": 0.23,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2017-12-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "SNPS",
+      "name": "Synopsys Inc.",
+      "qqq_weight_pct": 0.22,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2017-12-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MNST",
+      "name": "Monster Beverage",
+      "qqq_weight_pct": 0.22,
+      "sector": "Consumer Staples",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CMCSA",
+      "name": "Comcast Corp.",
+      "qqq_weight_pct": 0.22,
+      "sector": "Media & Telecom",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MDLZ",
+      "name": "Mondelez International",
+      "qqq_weight_pct": 0.21,
+      "sector": "Consumer Staples",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "DASH",
+      "name": "DoorDash Inc.",
+      "qqq_weight_pct": 0.19,
+      "sector": "Cloud & E-Commerce",
+      "pit_intervals": [
+        [
+          "2023-12-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MELI",
+      "name": "MercadoLibre Inc.",
+      "qqq_weight_pct": 0.19,
+      "sector": "Cloud & E-Commerce",
+      "pit_intervals": [
+        [
+          "2017-06-19",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ROST",
+      "name": "Ross Stores Inc.",
+      "qqq_weight_pct": 0.19,
+      "sector": "Consumer Retail",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MPWR",
+      "name": "Monolithic Power Systems",
+      "qqq_weight_pct": 0.18,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2025-12-22",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ORLY",
+      "name": "O'Reilly Automotive",
+      "qqq_weight_pct": 0.18,
+      "sector": "Consumer Retail",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "HON",
+      "name": "Honeywell International",
+      "qqq_weight_pct": 0.18,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2021-07-21",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "AEP",
+      "name": "American Electric Power",
+      "qqq_weight_pct": 0.18,
+      "sector": "Clean Energy & Power",
+      "pit_intervals": [
+        [
+          "2020-12-21",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "NXPI",
+      "name": "NXP Semiconductors",
+      "qqq_weight_pct": 0.17,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2017-02-07"
+        ],
+        [
+          "2018-11-05",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "DDOG",
+      "name": "Datadog Inc.",
+      "qqq_weight_pct": 0.17,
+      "sector": "Enterprise Software",
+      "pit_intervals": [
+        [
+          "2021-12-20",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "FAST",
+      "name": "Fastenal Co.",
+      "qqq_weight_pct": 0.16,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "LITE",
+      "name": "Lumentum",
+      "qqq_weight_pct": 0.15,
+      "sector": "Technology",
+      "pit_intervals": [
+        [
+          "2026-05-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "PCAR",
+      "name": "PACCAR Inc.",
+      "qqq_weight_pct": 0.14,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "IDXX",
+      "name": "IDEXX Laboratories",
+      "qqq_weight_pct": 0.14,
+      "sector": "MedTech",
+      "pit_intervals": [
+        [
+          "2017-03-20",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ADSK",
+      "name": "Autodesk Inc.",
+      "qqq_weight_pct": 0.14,
+      "sector": "Enterprise Software",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CCEP",
+      "name": "Coca-Cola Europacific",
+      "qqq_weight_pct": 0.14,
+      "sector": "Consumer Staples",
+      "pit_intervals": [
+        [
+          "2023-12-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "HONA",
+      "name": "Honeywell Aerospace",
+      "qqq_weight_pct": 0.13,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2026-06-29",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "KDP",
+      "name": "Keurig Dr Pepper",
+      "qqq_weight_pct": 0.13,
+      "sector": "Consumer Staples",
+      "pit_intervals": [
+        [
+          "2020-10-19",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "XEL",
+      "name": "Xcel Energy",
+      "qqq_weight_pct": 0.13,
+      "sector": "Clean Energy & Power",
+      "pit_intervals": [
+        [
+          "2018-11-19",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "FANG",
+      "name": "Diamondback Energy",
+      "qqq_weight_pct": 0.13,
+      "sector": "Energy",
+      "pit_intervals": [
+        [
+          "2022-12-19",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "PYPL",
+      "name": "PayPal Holdings",
+      "qqq_weight_pct": 0.13,
+      "sector": "FinTech & HR",
+      "pit_intervals": [
+        [
+          "2015-11-11",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "TRI",
+      "name": "Thomson Reuters Corp.",
+      "qqq_weight_pct": 0.12,
+      "sector": "FinTech & HR",
+      "pit_intervals": [
+        [
+          "2025-07-28",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MSTR",
+      "name": "Strategy / MicroStrategy",
+      "qqq_weight_pct": 0.12,
+      "sector": "Enterprise Software",
+      "pit_intervals": [
+        [
+          "2024-12-23",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ROP",
+      "name": "Roper Technologies",
+      "qqq_weight_pct": 0.12,
+      "sector": "Enterprise Software",
+      "pit_intervals": [
+        [
+          "2023-12-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "EXC",
+      "name": "Exelon Corp.",
+      "qqq_weight_pct": 0.12,
+      "sector": "Clean Energy & Power",
+      "pit_intervals": [
+        [
+          "2019-11-21",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "WDAY",
+      "name": "Workday Inc.",
+      "qqq_weight_pct": 0.12,
+      "sector": "Enterprise Software",
+      "pit_intervals": [
+        [
+          "2017-12-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "FER",
+      "name": "Ferrovial SE",
+      "qqq_weight_pct": 0.11,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2025-12-22",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "RKLB",
+      "name": "Rocket Lab Corp.",
+      "qqq_weight_pct": 0.11,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2026-06-22",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "TTWO",
+      "name": "Take-Two Interactive",
+      "qqq_weight_pct": 0.11,
+      "sector": "Media & Streaming",
+      "pit_intervals": [
+        [
+          "2017-12-18",
+          "2020-12-21"
+        ],
+        [
+          "2023-12-14",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "TER",
+      "name": "Teradyne Inc.",
+      "qqq_weight_pct": 0.1,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2026-06-22",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "PAYX",
+      "name": "Paychex Inc.",
+      "qqq_weight_pct": 0.1,
+      "sector": "FinTech & HR",
+      "pit_intervals": [
+        [
+          "2015-01-01",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ALAB",
+      "name": "Astera Labs Inc.",
+      "qqq_weight_pct": 0.1,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2026-06-22",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "BKR",
+      "name": "Baker Hughes",
+      "qqq_weight_pct": 0.1,
+      "sector": "Energy",
+      "pit_intervals": [
+        [
+          "2022-12-19",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "GEHC",
+      "name": "GE HealthCare",
+      "qqq_weight_pct": 0.09,
+      "sector": "MedTech",
+      "pit_intervals": [
+        [
+          "2023-06-07",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "NBIS",
+      "name": "Nebius Group N.V.",
+      "qqq_weight_pct": 0.09,
+      "sector": "Cloud & E-Commerce",
+      "pit_intervals": [
+        [
+          "2026-06-22",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ODFL",
+      "name": "Old Dominion Freight",
+      "qqq_weight_pct": 0.09,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2022-01-24",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "MCHP",
+      "name": "Microchip Technology",
+      "qqq_weight_pct": 0.09,
+      "sector": "Semiconductors",
+      "pit_intervals": [
+        [
+          "2016-07-18",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CRWV",
+      "name": "CoreWeave Inc.",
+      "qqq_weight_pct": 0.08,
+      "sector": "Cloud & E-Commerce",
+      "pit_intervals": [
+        [
+          "2026-06-22",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "DXCM",
+      "name": "DexCom Inc.",
+      "qqq_weight_pct": 0.08,
+      "sector": "MedTech",
+      "pit_intervals": [
+        [
+          "2020-04-20",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "CPRT",
+      "name": "Copart Inc.",
+      "qqq_weight_pct": 0.08,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2019-12-23",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "AXON",
+      "name": "Axon Enterprise",
+      "qqq_weight_pct": 0.06,
+      "sector": "Industrials",
+      "pit_intervals": [
+        [
+          "2024-12-23",
+          "2099-12-31"
+        ]
+      ]
+    },
+    {
+      "symbol": "ALNY",
+      "name": "Alnylam Pharmaceuticals",
+      "qqq_weight_pct": 0.05,
+      "sector": "Biotech",
+      "pit_intervals": [
+        [
+          "2025-12-22",
+          "2099-12-31"
+        ]
+      ]
+    }
+  ]
+}

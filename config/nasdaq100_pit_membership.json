@@ -1,0 +1,2442 @@
+{
+  "AAL": {
+    "name": "American Airlines",
+    "sector": "Travel Tech & Airlines",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2020-04-20"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "AAPL": {
+    "name": "Apple Inc.",
+    "sector": "Consumer Tech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 15.12
+  },
+  "ABNB": {
+    "name": "Airbnb Inc.",
+    "sector": "Travel Tech",
+    "intervals": [
+      [
+        "2021-12-20",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.63
+  },
+  "ADBE": {
+    "name": "Adobe Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.44
+  },
+  "ADI": {
+    "name": "Analog Devices",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.5
+  },
+  "ADP": {
+    "name": "Automatic Data Processing",
+    "sector": "FinTech & HR",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.41
+  },
+  "ADSK": {
+    "name": "Autodesk Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.22
+  },
+  "AEP": {
+    "name": "American Electric Power",
+    "sector": "Clean Energy & Power",
+    "intervals": [
+      [
+        "2020-12-21",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.53
+  },
+  "AKAM": {
+    "name": "Akamai Technologies",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 0.15
+  },
+  "ALAB": {
+    "name": "Astera Labs Inc.",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2026-06-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.16
+  },
+  "ALGN": {
+    "name": "Align Technology",
+    "sector": "MedTech",
+    "intervals": [
+      [
+        "2017-10-23",
+        "2023-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 0.075
+  },
+  "ALNY": {
+    "name": "Alnylam Pharmaceuticals",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2025-12-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.13
+  },
+  "ALTR": {
+    "name": "Altera",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-10-07"
+      ]
+    ],
+    "shares_split_adj_billions": 0.32
+  },
+  "ALXN": {
+    "name": "Alexion Pharmaceuticals",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2021-07-21"
+      ]
+    ],
+    "shares_split_adj_billions": 0.22
+  },
+  "AMAT": {
+    "name": "Applied Materials",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.82
+  },
+  "AMD": {
+    "name": "Advanced Micro Devices",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2018-12-24",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.62
+  },
+  "AMGN": {
+    "name": "Amgen Inc.",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.54
+  },
+  "AMZN": {
+    "name": "Amazon.com Inc.",
+    "sector": "Cloud & E-Commerce",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 10.52
+  },
+  "ANSS": {
+    "name": "ANSYS Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2019-12-23",
+        "2025-07-17"
+      ]
+    ],
+    "shares_split_adj_billions": 0.087
+  },
+  "APP": {
+    "name": "AppLovin Corp.",
+    "sector": "Internet & AI",
+    "intervals": [
+      [
+        "2024-11-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.34
+  },
+  "ARM": {
+    "name": "Arm Holdings",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2024-06-24",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.05
+  },
+  "ASML": {
+    "name": "ASML Holding",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2017-12-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.39
+  },
+  "ATVI": {
+    "name": "Activision Blizzard",
+    "sector": "Media & Streaming",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2023-07-17"
+      ]
+    ],
+    "shares_split_adj_billions": 0.79
+  },
+  "AVGO": {
+    "name": "Broadcom Inc.",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-11-11"
+      ],
+      [
+        "2016-02-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 4.69
+  },
+  "AXON": {
+    "name": "Axon Enterprise",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2024-12-23",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.076
+  },
+  "AZN": {
+    "name": "AstraZeneca",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2022-02-22",
+        "2026-01-20"
+      ]
+    ],
+    "shares_split_adj_billions": 1.55
+  },
+  "BATRA": {
+    "name": "Liberty Media",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2016-04-18",
+        "2016-06-20"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "BATRK": {
+    "name": "Liberty Media",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2016-04-18",
+        "2016-06-20"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "BBBY": {
+    "name": "Bed Bath & Beyond",
+    "sector": "Consumer Retail",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2016-12-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.14
+  },
+  "BIDU": {
+    "name": "Baidu",
+    "sector": "Internet & Search",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2022-12-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.04
+  },
+  "BIIB": {
+    "name": "Biogen Inc.",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2025-12-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.15
+  },
+  "BKNG": {
+    "name": "Booking Holdings",
+    "sector": "Travel Tech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.033
+  },
+  "BKR": {
+    "name": "Baker Hughes",
+    "sector": "Energy",
+    "intervals": [
+      [
+        "2022-12-19",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.99
+  },
+  "BMRN": {
+    "name": "BioMarin Pharmaceutical",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-07-27",
+        "2020-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "CA": {
+    "name": "CA Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2018-11-05"
+      ]
+    ],
+    "shares_split_adj_billions": 0.42
+  },
+  "CCEP": {
+    "name": "Coca-Cola Europacific",
+    "sector": "Consumer Staples",
+    "intervals": [
+      [
+        "2023-12-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.46
+  },
+  "CDNS": {
+    "name": "Cadence Design Systems",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2017-12-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.27
+  },
+  "CDW": {
+    "name": "CDW Corp.",
+    "sector": "IT Services",
+    "intervals": [
+      [
+        "2019-12-23",
+        "2021-12-20"
+      ],
+      [
+        "2023-12-18",
+        "2025-12-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.13
+  },
+  "CEG": {
+    "name": "Constellation Energy",
+    "sector": "Clean Energy & Power",
+    "intervals": [
+      [
+        "2022-02-02",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.31
+  },
+  "CELG": {
+    "name": "Celgene",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2019-11-21"
+      ]
+    ],
+    "shares_split_adj_billions": 0.78
+  },
+  "CERN": {
+    "name": "Cerner Corp.",
+    "sector": "MedTech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2021-12-20"
+      ]
+    ],
+    "shares_split_adj_billions": 0.29
+  },
+  "CHKP": {
+    "name": "Check Point Software",
+    "sector": "Cybersecurity",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2021-12-20"
+      ]
+    ],
+    "shares_split_adj_billions": 0.11
+  },
+  "CHRW": {
+    "name": "C. H. Robinson Worldwide",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "CHTR": {
+    "name": "Charter Communications",
+    "sector": "Media & Telecom",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2026-06-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.14
+  },
+  "CMCSA": {
+    "name": "Comcast Corp.",
+    "sector": "Media & Telecom",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 3.84
+  },
+  "COST": {
+    "name": "Costco Wholesale",
+    "sector": "Consumer Retail",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.44
+  },
+  "CPRT": {
+    "name": "Copart Inc.",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2019-12-23",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.96
+  },
+  "CRWD": {
+    "name": "CrowdStrike Holdings",
+    "sector": "Cybersecurity",
+    "intervals": [
+      [
+        "2021-08-26",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.25
+  },
+  "CRWV": {
+    "name": "CoreWeave Inc.",
+    "sector": "Cloud & E-Commerce",
+    "intervals": [
+      [
+        "2026-06-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.48
+  },
+  "CSCO": {
+    "name": "Cisco Systems",
+    "sector": "Networking",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 3.98
+  },
+  "CSGP": {
+    "name": "CoStar Group",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2019-12-23",
+        "2020-07-20"
+      ],
+      [
+        "2022-12-19",
+        "2026-05-18"
+      ]
+    ],
+    "shares_split_adj_billions": 0.41
+  },
+  "CSX": {
+    "name": "CSX Corp.",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2016-02-16",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.93
+  },
+  "CTAS": {
+    "name": "Cintas Corp.",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2016-12-19",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.4
+  },
+  "CTRX": {
+    "name": "Catamaran Corporation",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-07-24"
+      ]
+    ],
+    "shares_split_adj_billions": 0.125
+  },
+  "CTSH": {
+    "name": "Cognizant Tech Solutions",
+    "sector": "IT Services",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2026-06-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.5
+  },
+  "CTXS": {
+    "name": "Citrix Systems",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2020-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 0.125
+  },
+  "DASH": {
+    "name": "DoorDash Inc.",
+    "sector": "Cloud & E-Commerce",
+    "intervals": [
+      [
+        "2023-12-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.41
+  },
+  "DDOG": {
+    "name": "Datadog Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2021-12-20",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.34
+  },
+  "DISCA": {
+    "name": "Discovery CommunicationsSeries A",
+    "sector": "Media & Telecom",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "DISCK": {
+    "name": "Discovery CommunicationsSeries C",
+    "sector": "Media & Telecom",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "DISH": {
+    "name": "Dish Network",
+    "sector": "Media & Telecom",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2018-07-23"
+      ]
+    ],
+    "shares_split_adj_billions": 0.53
+  },
+  "DLTR": {
+    "name": "Dollar Tree Inc.",
+    "sector": "Consumer Retail",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2024-11-18"
+      ]
+    ],
+    "shares_split_adj_billions": 0.21
+  },
+  "DOCU": {
+    "name": "DocuSign Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2020-06-22",
+        "2022-12-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.2
+  },
+  "DTV": {
+    "name": "DirecTV",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-07-24"
+      ]
+    ],
+    "shares_split_adj_billions": 0.51
+  },
+  "DXCM": {
+    "name": "DexCom Inc.",
+    "sector": "MedTech",
+    "intervals": [
+      [
+        "2020-04-20",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.4
+  },
+  "EA": {
+    "name": "Electronic Arts",
+    "sector": "Media & Streaming",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2026-08-04"
+      ]
+    ],
+    "shares_split_adj_billions": 0.26
+  },
+  "EBAY": {
+    "name": "eBay Inc.",
+    "sector": "Cloud & E-Commerce",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2023-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 0.49
+  },
+  "ENDP": {
+    "name": "Endo International",
+    "sector": "Pharma",
+    "intervals": [
+      [
+        "2015-12-21",
+        "2016-07-18"
+      ]
+    ],
+    "shares_split_adj_billions": 0.22
+  },
+  "ENPH": {
+    "name": "Enphase Energy",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2022-11-21",
+        "2023-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "EQIX": {
+    "name": "Equinix",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-03-23"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "ESRX": {
+    "name": "Express Scripts",
+    "sector": "Healthcare",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2018-12-24"
+      ]
+    ],
+    "shares_split_adj_billions": 0.56
+  },
+  "EXC": {
+    "name": "Exelon Corp.",
+    "sector": "Clean Energy & Power",
+    "intervals": [
+      [
+        "2019-11-21",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "EXPD": {
+    "name": "Expeditors International",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 0.15
+  },
+  "EXPE": {
+    "name": "Expedia",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-12-21",
+        "2020-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "FANG": {
+    "name": "Diamondback Energy",
+    "sector": "Energy",
+    "intervals": [
+      [
+        "2022-12-19",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.29
+  },
+  "FAST": {
+    "name": "Fastenal Co.",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.57
+  },
+  "FER": {
+    "name": "Ferrovial SE",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2025-12-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.72
+  },
+  "FI": {
+    "name": "Fiserv",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2023-06-07"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "FOX": {
+    "name": "Fox Corporation",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2021-12-20"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "FOXA": {
+    "name": "Fox Corporation",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2021-12-20"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "FTNT": {
+    "name": "Fortinet Inc.",
+    "sector": "Cybersecurity",
+    "intervals": [
+      [
+        "2021-12-20",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.77
+  },
+  "GEHC": {
+    "name": "GE HealthCare",
+    "sector": "MedTech",
+    "intervals": [
+      [
+        "2023-06-07",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.46
+  },
+  "GEN": {
+    "name": "Symantec / NortonLifeLock",
+    "sector": "Cybersecurity",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2019-12-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.62
+  },
+  "GFS": {
+    "name": "GlobalFoundries",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2022-12-19",
+        "2025-12-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.55
+  },
+  "GILD": {
+    "name": "Gilead Sciences",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.25
+  },
+  "GMCR": {
+    "name": "Keurig Green Mountain",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 0.15
+  },
+  "GOOG": {
+    "name": "Alphabet Inc.(Class C)",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0,
+    "is_dual_class_duplicate": true
+  },
+  "GOOGL": {
+    "name": "Alphabet Inc.",
+    "sector": "Internet & AI",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 12.26
+  },
+  "GRMN": {
+    "name": "Garmin",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "HAS": {
+    "name": "Hasbro",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2016-12-19",
+        "2019-12-23"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "HOLX": {
+    "name": "Hologic Inc.",
+    "sector": "MedTech",
+    "intervals": [
+      [
+        "2016-12-19",
+        "2018-12-24"
+      ]
+    ],
+    "shares_split_adj_billions": 0.23
+  },
+  "HON": {
+    "name": "Honeywell International",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2021-07-21",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.65
+  },
+  "HONA": {
+    "name": "Honeywell Aerospace",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2026-06-29",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "HSIC": {
+    "name": "Henry Schein",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2019-12-23"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "IDXX": {
+    "name": "IDEXX Laboratories",
+    "sector": "MedTech",
+    "intervals": [
+      [
+        "2017-03-20",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.082
+  },
+  "ILMN": {
+    "name": "Illumina Inc.",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2024-12-23"
+      ]
+    ],
+    "shares_split_adj_billions": 0.16
+  },
+  "INCY": {
+    "name": "Incyte",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-10-07",
+        "2021-12-20"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "INSM": {
+    "name": "Insmed Inc.",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2025-12-22",
+        "2026-06-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.18
+  },
+  "INTC": {
+    "name": "Intel Corp.",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 4.31
+  },
+  "INTU": {
+    "name": "Intuit Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.28
+  },
+  "ISRG": {
+    "name": "Intuitive Surgical",
+    "sector": "MedTech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.36
+  },
+  "JBHT": {
+    "name": "J.B. Hunt Transport",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2017-02-07",
+        "2019-12-23"
+      ]
+    ],
+    "shares_split_adj_billions": 0.1
+  },
+  "JD": {
+    "name": "JD.com",
+    "sector": "E-Commerce",
+    "intervals": [
+      [
+        "2015-07-29",
+        "2023-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 1.55
+  },
+  "KDP": {
+    "name": "Keurig Dr Pepper",
+    "sector": "Consumer Staples",
+    "intervals": [
+      [
+        "2020-10-19",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.36
+  },
+  "KFT": {
+    "name": "Kraft Foods",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.59
+  },
+  "KHC": {
+    "name": "Kraft Heinz Co.",
+    "sector": "Consumer Staples",
+    "intervals": [
+      [
+        "2015-07-02",
+        "2026-09-14"
+      ]
+    ],
+    "shares_split_adj_billions": 1.21
+  },
+  "KLAC": {
+    "name": "KLA Corp.",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2016-02-16"
+      ],
+      [
+        "2016-12-19",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.13
+  },
+  "KRFT": {
+    "name": "Kraft Foods",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-07-02"
+      ]
+    ],
+    "shares_split_adj_billions": 0.59
+  },
+  "LBTYA": {
+    "name": "Liberty Global",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2020-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "LBTYK": {
+    "name": "Liberty Global",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2020-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "LCID": {
+    "name": "Lucid Group",
+    "sector": "Autos & Autonomy",
+    "intervals": [
+      [
+        "2021-12-20",
+        "2023-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 2.3
+  },
+  "LILA": {
+    "name": "Liberty Latin America Class A",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-07-02",
+        "2015-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "LILAK": {
+    "name": "Liberty Latin America Class C",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-07-02",
+        "2015-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "LIN": {
+    "name": "Linde plc",
+    "sector": "Industrial Gases",
+    "intervals": [
+      [
+        "2024-03-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.48
+  },
+  "LITE": {
+    "name": "Lumentum",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2026-05-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "LLTC": {
+    "name": "Linear Technology",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2016-10-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.24
+  },
+  "LMCA": {
+    "name": "Liberty Media",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2016-06-20"
+      ]
+    ],
+    "shares_split_adj_billions": 0.1
+  },
+  "LMCK": {
+    "name": "Liberty Media",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2016-06-20"
+      ]
+    ],
+    "shares_split_adj_billions": 0.1
+  },
+  "LRCX": {
+    "name": "Lam Research",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.29
+  },
+  "LULU": {
+    "name": "Lululemon Athletica",
+    "sector": "Consumer Retail",
+    "intervals": [
+      [
+        "2018-12-24",
+        "2025-12-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.12
+  },
+  "MAR": {
+    "name": "Marriott International",
+    "sector": "Travel Tech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.28
+  },
+  "MAT": {
+    "name": "Mattel",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-10-23"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "MCHP": {
+    "name": "Microchip Technology",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2016-07-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.54
+  },
+  "MDB": {
+    "name": "MongoDB Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2023-12-18",
+        "2025-05-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.074
+  },
+  "MDLZ": {
+    "name": "Mondelez International",
+    "sector": "Consumer Staples",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.33
+  },
+  "MELI": {
+    "name": "MercadoLibre Inc.",
+    "sector": "Cloud & E-Commerce",
+    "intervals": [
+      [
+        "2017-06-19",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.051
+  },
+  "META": {
+    "name": "Meta Platforms Inc.",
+    "sector": "Internet & AI",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 2.53
+  },
+  "MNST": {
+    "name": "Monster Beverage",
+    "sector": "Consumer Staples",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.98
+  },
+  "MPWR": {
+    "name": "Monolithic Power Systems",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2025-12-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.049
+  },
+  "MRNA": {
+    "name": "Moderna Inc.",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2020-07-20",
+        "2024-12-23"
+      ],
+      [
+        "2026-10-09",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.38
+  },
+  "MRVL": {
+    "name": "Marvell Technology",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2020-12-21",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.87
+  },
+  "MSFT": {
+    "name": "Microsoft Corp.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 7.43
+  },
+  "MSTR": {
+    "name": "Strategy / MicroStrategy",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2024-12-23",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.24
+  },
+  "MTCH": {
+    "name": "Match Group",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2020-12-21",
+        "2022-12-19"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "MU": {
+    "name": "Micron Technology",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.11
+  },
+  "MXIM": {
+    "name": "Maxim Integrated Products",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-12-21",
+        "2021-08-26"
+      ]
+    ],
+    "shares_split_adj_billions": 0.27
+  },
+  "MYL": {
+    "name": "Mylan",
+    "sector": "Pharma",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2019-12-23"
+      ]
+    ],
+    "shares_split_adj_billions": 0.51
+  },
+  "NBIS": {
+    "name": "Nebius Group N.V.",
+    "sector": "Cloud & E-Commerce",
+    "intervals": [
+      [
+        "2026-06-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.24
+  },
+  "NCLH": {
+    "name": "Norwegian Cruise Line Holdings",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-12-21",
+        "2017-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "NFLX": {
+    "name": "Netflix Inc.",
+    "sector": "Media & Streaming",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.43
+  },
+  "NLOK": {
+    "name": "NortonLifeLock",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2019-12-23"
+      ]
+    ],
+    "shares_split_adj_billions": 0.6
+  },
+  "NTAP": {
+    "name": "NetApp Inc.",
+    "sector": "Hardware",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2016-12-19"
+      ],
+      [
+        "2018-12-24",
+        "2020-08-24"
+      ]
+    ],
+    "shares_split_adj_billions": 0.2
+  },
+  "NTES": {
+    "name": "NetEase",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2016-03-16",
+        "2022-12-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.65
+  },
+  "NVDA": {
+    "name": "NVIDIA Corp.",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 24.49
+  },
+  "NWSA": {
+    "name": "News CorporationClass A",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "NXPI": {
+    "name": "NXP Semiconductors",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-02-07"
+      ],
+      [
+        "2018-11-05",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.25
+  },
+  "ODFL": {
+    "name": "Old Dominion Freight",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2022-01-24",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.21
+  },
+  "OKTA": {
+    "name": "Okta",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2020-12-21",
+        "2022-11-21"
+      ]
+    ],
+    "shares_split_adj_billions": 0.15
+  },
+  "ON": {
+    "name": "ON Semiconductor",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2023-06-20",
+        "2025-12-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.43
+  },
+  "ORLY": {
+    "name": "O'Reilly Automotive",
+    "sector": "Consumer Retail",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.058
+  },
+  "PANW": {
+    "name": "Palo Alto Networks",
+    "sector": "Cybersecurity",
+    "intervals": [
+      [
+        "2021-12-20",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.66
+  },
+  "PAYX": {
+    "name": "Paychex Inc.",
+    "sector": "FinTech & HR",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.36
+  },
+  "PCAR": {
+    "name": "PACCAR Inc.",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.52
+  },
+  "PCLN": {
+    "name": "Priceline.com",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.049
+  },
+  "PDD": {
+    "name": "PDD Holdings",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2020-08-24",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.35
+  },
+  "PEP": {
+    "name": "PepsiCo Inc.",
+    "sector": "Consumer Staples",
+    "intervals": [
+      [
+        "2018-07-23",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.37
+  },
+  "PLTR": {
+    "name": "Palantir Technologies",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2024-12-23",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 2.28
+  },
+  "PTON": {
+    "name": "Peloton",
+    "sector": "Consumer Hardware",
+    "intervals": [
+      [
+        "2020-12-21",
+        "2022-01-24"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "PYPL": {
+    "name": "PayPal Holdings",
+    "sector": "FinTech & HR",
+    "intervals": [
+      [
+        "2015-11-11",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.01
+  },
+  "QCOM": {
+    "name": "Qualcomm Inc.",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.11
+  },
+  "QRTEA": {
+    "name": "Qurate Retail",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2018-12-24"
+      ]
+    ],
+    "shares_split_adj_billions": 0.4
+  },
+  "REGN": {
+    "name": "Regeneron Pharma",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.11
+  },
+  "RIVN": {
+    "name": "Rivian Automotive",
+    "sector": "EV & Autonomy",
+    "intervals": [
+      [
+        "2022-12-19",
+        "2023-06-20"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "RKLB": {
+    "name": "Rocket Lab Corp.",
+    "sector": "Industrials",
+    "intervals": [
+      [
+        "2026-06-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.5
+  },
+  "ROP": {
+    "name": "Roper Technologies",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2023-12-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.11
+  },
+  "ROST": {
+    "name": "Ross Stores Inc.",
+    "sector": "Consumer Retail",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.33
+  },
+  "SBAC": {
+    "name": "SBA Communications",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-03-20"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "SBUX": {
+    "name": "Starbucks Corp.",
+    "sector": "Consumer Retail",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.13
+  },
+  "SGEN": {
+    "name": "Seagen Inc.",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2019-12-23",
+        "2023-12-14"
+      ]
+    ],
+    "shares_split_adj_billions": 0.19
+  },
+  "SHOP": {
+    "name": "Shopify",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2025-05-19",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "SHPG": {
+    "name": "Shire PLC",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2016-10-19",
+        "2018-12-24"
+      ]
+    ],
+    "shares_split_adj_billions": 0.3
+  },
+  "SIAL": {
+    "name": "Sigma-Aldrich",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-07-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.12
+  },
+  "SIRI": {
+    "name": "Sirius XM Holdings",
+    "sector": "Media & Telecom",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2024-06-24"
+      ]
+    ],
+    "shares_split_adj_billions": 0.34
+  },
+  "SMCI": {
+    "name": "Super Micro Computer",
+    "sector": "Hardware",
+    "intervals": [
+      [
+        "2024-07-22",
+        "2024-12-23"
+      ]
+    ],
+    "shares_split_adj_billions": 0.59
+  },
+  "SNDK": {
+    "name": "Sandisk",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2016-03-16"
+      ],
+      [
+        "2026-04-20",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "SNPS": {
+    "name": "Synopsys Inc.",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2017-12-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.15
+  },
+  "SOLS": {
+    "name": "Solstice Advanced Materials",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2025-10-30",
+        "2025-11-06"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "SPCX": {
+    "name": "SpaceX",
+    "sector": "Telecommunications",
+    "intervals": [
+      [
+        "2026-07-07",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "SPLK": {
+    "name": "Splunk Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2019-12-23",
+        "2022-12-19"
+      ],
+      [
+        "2023-12-18",
+        "2024-03-18"
+      ]
+    ],
+    "shares_split_adj_billions": 0.17
+  },
+  "SPLS": {
+    "name": "Staples",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 0.65
+  },
+  "SRCL": {
+    "name": "Stericycle",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2016-12-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.085
+  },
+  "STX": {
+    "name": "Seagate Technology",
+    "sector": "Hardware",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2018-12-24"
+      ],
+      [
+        "2025-12-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.21
+  },
+  "SWKS": {
+    "name": "Skyworks Solutions",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-08-03",
+        "2022-12-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.16
+  },
+  "TCOM": {
+    "name": "Trip.com",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-12-21",
+        "2021-12-20"
+      ]
+    ],
+    "shares_split_adj_billions": 0.65
+  },
+  "TEAM": {
+    "name": "Atlassian Corp.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2020-12-21",
+        "2026-04-20"
+      ]
+    ],
+    "shares_split_adj_billions": 0.26
+  },
+  "TER": {
+    "name": "Teradyne Inc.",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2026-06-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.16
+  },
+  "TMUS": {
+    "name": "T-Mobile US",
+    "sector": "Telecom",
+    "intervals": [
+      [
+        "2015-12-21",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.16
+  },
+  "TRI": {
+    "name": "Thomson Reuters Corp.",
+    "sector": "FinTech & HR",
+    "intervals": [
+      [
+        "2025-07-28",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.45
+  },
+  "TRIP": {
+    "name": "TripAdvisor",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-04-24"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "TSCO": {
+    "name": "Tractor Supply",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "TSLA": {
+    "name": "Tesla Inc.",
+    "sector": "Autos & Autonomy",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 3.21
+  },
+  "TTD": {
+    "name": "The Trade Desk",
+    "sector": "Internet & AI",
+    "intervals": [
+      [
+        "2023-07-17",
+        "2025-12-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.49
+  },
+  "TTWO": {
+    "name": "Take-Two Interactive",
+    "sector": "Media & Streaming",
+    "intervals": [
+      [
+        "2017-12-18",
+        "2020-12-21"
+      ],
+      [
+        "2023-12-14",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.18
+  },
+  "TXN": {
+    "name": "Texas Instruments",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.91
+  },
+  "UAL": {
+    "name": "United Airlines Holdings",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2018-12-24",
+        "2020-06-22"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "ULTA": {
+    "name": "Ulta Beauty",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-12-21",
+        "2020-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "VIAB": {
+    "name": "Viacom",
+    "sector": "Media & Streaming",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 0.4
+  },
+  "VIP": {
+    "name": "VimpelCom",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-12-21"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "VOD": {
+    "name": "Vodafone",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2018-12-24"
+      ]
+    ],
+    "shares_split_adj_billions": 2.7
+  },
+  "VRSK": {
+    "name": "Verisk Analytics",
+    "sector": "FinTech & HR",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2026-06-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.14
+  },
+  "VRSN": {
+    "name": "VeriSign Inc.",
+    "sector": "Internet & AI",
+    "intervals": [
+      [
+        "2018-12-24",
+        "2022-12-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.098
+  },
+  "VRTX": {
+    "name": "Vertex Pharmaceuticals",
+    "sector": "Biotech",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.26
+  },
+  "VSNT": {
+    "name": "Versant",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2026-01-05",
+        "2026-01-09"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "WBA": {
+    "name": "Walgreens Boots Alliance",
+    "sector": "Consumer Retail",
+    "intervals": [
+      [
+        "2015-03-23",
+        "2024-07-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.86
+  },
+  "WBD": {
+    "name": "Warner Bros. Discovery",
+    "sector": "Media & Streaming",
+    "intervals": [
+      [
+        "2022-12-19",
+        "2026-10-09"
+      ]
+    ],
+    "shares_split_adj_billions": 2.45
+  },
+  "WDAY": {
+    "name": "Workday Inc.",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2017-12-18",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.26
+  },
+  "WDC": {
+    "name": "Western Digital Corp.",
+    "sector": "Hardware",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2020-10-19"
+      ],
+      [
+        "2025-12-22",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.35
+  },
+  "WFM": {
+    "name": "Whole Foods Market",
+    "sector": "Consumer Retail",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2016-12-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.32
+  },
+  "WMT": {
+    "name": "Walmart",
+    "sector": "Consumer Discretionary",
+    "intervals": [
+      [
+        "2026-01-20",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "WTW": {
+    "name": "Willis Towers Watson",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2018-12-24",
+        "2020-04-30"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "WYNN": {
+    "name": "Wynn Resorts",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2015-12-21"
+      ],
+      [
+        "2017-04-24",
+        "2019-12-23"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "XEL": {
+    "name": "Xcel Energy",
+    "sector": "Clean Energy & Power",
+    "intervals": [
+      [
+        "2018-11-19",
+        "2099-12-31"
+      ]
+    ],
+    "shares_split_adj_billions": 0.56
+  },
+  "XLNX": {
+    "name": "Xilinx Inc.",
+    "sector": "Semiconductors",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2022-02-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.25
+  },
+  "XRAY": {
+    "name": "Dentsply Sirona",
+    "sector": "Technology",
+    "intervals": [
+      [
+        "2016-06-20",
+        "2018-11-19"
+      ]
+    ],
+    "shares_split_adj_billions": 1.0
+  },
+  "YHOO": {
+    "name": "Yahoo! Inc.",
+    "sector": "Internet & Search",
+    "intervals": [
+      [
+        "2015-01-01",
+        "2017-06-19"
+      ]
+    ],
+    "shares_split_adj_billions": 0.95
+  },
+  "ZM": {
+    "name": "Zoom Video Communications",
+    "sector": "Enterprise Software",
+    "intervals": [
+      [
+        "2020-04-30",
+        "2023-12-18"
+      ]
+    ],
+    "shares_split_adj_billions": 0.31
+  },
+  "ZS": {
+    "name": "Zscaler Inc.",
+    "sector": "Cybersecurity",
+    "intervals": [
+      [
+        "2021-12-20",
+        "2026-06-22"
+      ]
+    ],
+    "shares_split_adj_billions": 0.15
+  }
+}
