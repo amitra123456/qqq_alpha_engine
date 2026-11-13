@@ -55,3 +55,22 @@ From [`data/outputs/production_audit_summary.json`](../data/outputs/production_a
 | `2026-11-11` | \$692.35 | \$680.66 | +2.61% | +0.02% | +0.02% | `TBILLS` | `ABOVE_SMA200` |
 
 Note that on `2026-11-06` (when exiting to T-bills at `Open_t` from equity exposure held at `Close_{t-1}`), the `2026-11-06` strategy return captures the overnight-to-open transition gap between `2026-11-05` close and `2026-11-06` open plus `10 bps` exit cost before earning `DTB3` from `2026-11-06` onward.
+
+---
+
+## 5. Why v5 was retired and v6 adopted (November 2026)
+
+**v5 out-of-period test.** Rebuilding point-in-time Nasdaq-100 membership and SEC share counts back to 2010 and re-running the v5 rule (Top-8 cap-weight + QQQ 200-day rule, same simulator) on 2011–2016, a period v5 never covered:
+
+| 2011-01 to 2016-06 | CAGR | Max drawdown |
+| :--- | :---: | :---: |
+| QQQ total return | 14.1% | -16.1% |
+| QQQ 200-day rule | 3.7% | -26.9% |
+| Top-8 + 200-day rule (v5) | 3.5% | -27.8% |
+| Top-8, no exit rule | 12.7% | -24.1% |
+
+Over 2011–2026 v5 returned 15.0% vs QQQ's 18.2% (Sharpe 0.76 vs 0.83). On its own window its result was sensitive to the moving-average length (100-day 13.9%, 150-day 24.2%, 200-day 21.8% CAGR), and removing Apple or Nvidia from the rosters dropped it below QQQ.
+
+**Other approaches rejected along the way** (all tested on point-in-time data, next-day execution): stock-level predictors within the Nasdaq-100 (momentum, reversal, growth, margins, volume, FINRA off-exchange short volume, insider buying) showed no reliable edge; macro, options-implied, dark-pool, acceleration and chart-pattern drop predictors did not beat simple price signals out of sample; faster moving-average and breakout exits lost more to whipsaws than they saved.
+
+**v6 adopted.** A continuous volatility target was the only approach that beat QQQ over both 2002–2014 and 2014–2026 and through the 1999–2002 crash, and 45 of 48 parameter settings tried beat QQQ on both return and drawdown (README, sections 3–4). A fixed "exit when volatility exceeds 30%" rule scored higher (about 17–18% CAGR) but was rejected: its dot-com result depended on that exact threshold (at 35% the crash loss was -39%, at 40% -64%).

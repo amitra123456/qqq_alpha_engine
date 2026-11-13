@@ -1,0 +1,116 @@
+{
+  "strategy": "QQQ volatility target 20%, max 1.5x (QLD for exposure above 1x), 10-point deadband, next-open execution",
+  "start": "1999-04-12",
+  "end": "2026-11-11",
+  "full_period": {
+    "QQQ buy & hold (total return)": {
+      "cagr_pct": 10.271814275741775,
+      "max_dd_pct": -82.96390745770393,
+      "sharpe": 0.418921716526424,
+      "avg_exposure": 1.0
+    },
+    "QQQ 200-day rule (T-bills below)": {
+      "cagr_pct": 7.689726486162862,
+      "max_dd_pct": -51.22997098720177,
+      "sharpe": 0.39644029115347434,
+      "avg_exposure": 0.7210776545166403
+    },
+    "Vol target 20%, max 1.0x": {
+      "cagr_pct": 11.521821205607408,
+      "max_dd_pct": -54.88924734379839,
+      "sharpe": 0.5866203974461618,
+      "avg_exposure": 0.8333672474537615
+    },
+    "Vol target 20%, max 1.25x": {
+      "cagr_pct": 12.551600441728228,
+      "max_dd_pct": -54.88924734379839,
+      "sharpe": 0.5966241397929106,
+      "avg_exposure": 0.9707084862239096
+    },
+    "STRATEGY: Vol target 20%, max 1.5x": {
+      "cagr_pct": 12.818442782533634,
+      "max_dd_pct": -54.88924734379839,
+      "sharpe": 0.5876843130970064,
+      "avg_exposure": 1.0520575337564164
+    }
+  },
+  "years_beating_qqq": {
+    "QQQ 200-day rule (T-bills below)": 5,
+    "Vol target 20%, max 1.0x": 9,
+    "Vol target 20%, max 1.25x": 15,
+    "STRATEGY: Vol target 20%, max 1.5x": 16
+  },
+  "n_years": 28,
+  "turnover_x_per_year": {
+    "QQQ buy & hold (total return)": 0.0362531017369727,
+    "QQQ 200-day rule (T-bills below)": 6.815583126550868,
+    "Vol target 20%, max 1.0x": 1.160967219487114,
+    "Vol target 20%, max 1.25x": 3.079708313922564,
+    "STRATEGY: Vol target 20%, max 1.5x": 5.72783887973351
+  },
+  "sensitivity": {
+    "QLD leverage, 10 bps (base case)": {
+      "cagr_pct": 12.818442782533634,
+      "max_dd_pct": -54.88924734379839,
+      "sharpe": 0.5876843130970064,
+      "avg_exposure": 1.0520575337564164,
+      "turnover_x_per_year": 5.72783887973351
+    },
+    "QLD leverage, 20 bps": {
+      "cagr_pct": 12.176104341051452,
+      "max_dd_pct": -55.066370937785415,
+      "sharpe": 0.559788464377302,
+      "avg_exposure": 1.0520575337564164,
+      "turnover_x_per_year": 5.727838879733511
+    },
+    "QLD leverage, 30 bps": {
+      "cagr_pct": 11.537219808225263,
+      "max_dd_pct": -55.24282391283424,
+      "sharpe": 0.5318702738953958,
+      "avg_exposure": 1.0520575337564164,
+      "turnover_x_per_year": 5.727838879733509
+    },
+    "Margin at T-bill + 0.3% (futures-like)": {
+      "cagr_pct": 13.311948816993313,
+      "max_dd_pct": -54.88924734379839,
+      "sharpe": 0.609337204119716,
+      "avg_exposure": 1.0478542436876763,
+      "turnover_x_per_year": 3.7505568739889843
+    },
+    "Margin at T-bill + 1%": {
+      "cagr_pct": 13.176503073041257,
+      "max_dd_pct": -54.88924734379839,
+      "sharpe": 0.6034407229054662,
+      "avg_exposure": 1.0480351838721123,
+      "turnover_x_per_year": 3.746813159963023
+    },
+    "Margin at T-bill + 2%": {
+      "cagr_pct": 12.982465431093736,
+      "max_dd_pct": -54.88924734379839,
+      "sharpe": 0.5950572712316339,
+      "avg_exposure": 1.0480581788782535,
+      "turnover_x_per_year": 3.740802096143056
+    },
+    "No deadband (trade every day)": {
+      "cagr_pct": 12.617286446265584,
+      "max_dd_pct": -52.44156363780179,
+      "sharpe": 0.5797814837644006,
+      "avg_exposure": 1.0534510735449394,
+      "turnover_x_per_year": 9.73261158916674
+    }
+  },
+  "qld_model_check": {
+    "real_qld_cagr_pct": 24.26403552951062,
+    "synthetic_cagr_pct": 24.322411318097558,
+    "daily_tracking_error_bps": 24.791286210714375,
+    "from": "2006-06-22"
+  },
+  "parameter_grid": {
+    "combinations": 48,
+    "cagr_min": 9.923026079094853,
+    "cagr_median": 12.685930720477923,
+    "cagr_max": 16.716231664057535,
+    "beat_qqq_cagr": 45,
+    "beat_qqq_cagr_and_drawdown": 45
+  }
+}

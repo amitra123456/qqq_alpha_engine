@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-11-13T12:50:19.054336",
+  "strategy_version": "6.0.0-qqq-voltarget-1.5x",
+  "strategy_name": "QQQ Volatility Target 20% (max 1.5x via QLD) with T-bill cash",
+  "data_source_mode": "OFFLINE_CACHE",
+  "bar_as_of_date": "2026-11-11",
+  "intraday_note": null,
+  "parameters": {
+    "target_vol": 0.2,
+    "max_exposure": 1.5,
+    "lookback_days": 21,
+    "rebalance_deadband": 0.1
+  },
+  "qqq_close": 692.35,
+  "realised_vol_pct": 36.05,
+  "target_exposure": 0.5548,
+  "current_exposure": null,
+  "current_exposure_source": "unknown (first run)",
+  "action": "REBALANCE_AT_NEXT_OPEN",
+  "exposure_after_orders": 0.5548,
+  "portfolio_equity": 100000.0,
+  "holdings": [
+    {
+      "symbol": "QQQ",
+      "name": "Invesco QQQ Trust (Nasdaq-100)",
+      "role": "QQQ",
+      "target_weight_pct": 55.48,
+      "target_dollars": 55480.6,
+      "target_shares": 80,
+      "spot_price": 692.35,
+      "status": "REBALANCE_AT_NEXT_OPEN",
+      "execution_order_type": "09:30 ET next open"
+    },
+    {
+      "symbol": "QLD",
+      "name": "ProShares Ultra QQQ (2x daily)",
+      "role": "QLD",
+      "target_weight_pct": 0.0,
+      "target_dollars": 0.0,
+      "target_shares": 0,
+      "spot_price": 81.83,
+      "status": "REBALANCE_AT_NEXT_OPEN",
+      "execution_order_type": "09:30 ET next open"
+    },
+    {
+      "symbol": "SGOV",
+      "name": "T-bill ETF",
+      "role": "TBILL",
+      "target_weight_pct": 44.52,
+      "target_dollars": 44519.4,
+      "target_shares": 442,
+      "spot_price": 100.52,
+      "status": "REBALANCE_AT_NEXT_OPEN",
+      "execution_order_type": "09:30 ET next open"
+    }
+  ]
+}

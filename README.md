@@ -1,139 +1,155 @@
-# QQQ Alpha Engine — Point-in-Time Nasdaq-100 Cap-Weight + QQQ 200-Day Moving Average
+# QQQ Alpha Engine — Volatility-Target QQQ (v6.0.0)
 
-A minimal, un-fitted equity strategy for the Nasdaq-100 universe: hold the quarterly Point-in-Time (`PIT`) largest `QQQ` constituents weighted by causal SEC EDGAR market capitalization (`Top-8` default; `Top-16` supported) whenever `QQQ` closes above its 200-day simple moving average, and hold 3-month US Treasury Bills otherwise.
-
----
-
-## 1. Verdict, Weaknesses, and Caveats (Read First)
-
-Over `2016-06-30` to `2026-11-11` (`2,607` trading sessions, `42` quarters), holding the PIT Top-8 cap-weighted basket when `QQQ` is above its 200-day SMA returned `21.81%` annualized CAGR (`\$772,665` from `\$100,000`) with a `-23.50%` maximum drawdown at `10 bps` cost per traded dollar, compared to `20.49%` CAGR (`-35.12%` MaxDD) for Total-Return `QQQ` buy-and-hold.
-
-Before relying on these numbers, note four structural limitations:
-
-1. **Post-selection sample (`2016–2026` is not untouched out-of-sample):** Multiple candidate overlays, factor models, and alternative rules were tested on `2016–2026` before selecting this rule. Its defense against overfitting is structural rather than statistical: market-cap weighting, quarterly reconstitution, a standard 200-day simple moving average, and 3-month Treasury bills use zero fitted parameters.
-2. **Flat-MA whipsaw drag and V-bottom re-entry lag:** Binary 200-day moving average switches suffer whipsaws when `QQQ` oscillates near a flat moving average. In the `2026-11-05` to `2026-11-11` episode, `QQQ` closed `-6.49%` down at `\$647.05` below its 200-day SMA (`\$679.61`), exited to T-bills at the `2026-11-06` open, missed rebounds of `+3.54%` (`Nov 9`) and `+2.61%` (`Nov 11`), and re-entered at the `2026-11-12` open. Over the longer `1999–2026` index-only history, `QQQ > 200d SMA` (`7.85%` CAGR) also trailed a `QQQ 20% Volatility-Target` rule (`10.51%` CAGR) due to late re-entry after sharp bear-market bottoms.
-3. **Constituent start date and dividend asymmetry:** Point-in-time constituent data begins in `2016-Q2`, so the Top-8 and Top-16 concentration sleeves were not tested during the `2000–2002` dot-com unwind. Cached constituent CSVs (`data/cache/alpaca_sip_daily/*.csv`) are split-adjusted price-only (omitting roughly `0.5%/yr` in cash dividends), whereas the `QQQ` benchmark uses Total-Return `QQQ` and cash uses 1-day-lagged `FRED DTB3`.
-4. **Statistical precision of excess returns:** Full-period Newey-West (`maxlags=5`) annualized alpha is `+7.43%` (`t = +1.88`, `p = 0.0606`) for `PIT Top-8 + QQQ 200d MA` vs Total-Return `QQQ` (`+7.14%`, `t = +1.84`, `p = 0.0662` vs Beta-Matched `QQQ`) and `+5.51%` (`t = +1.51`, `p = 0.1322`) for `PIT Top-16 + QQQ 200d MA`. Neither exceeds conventional `p < 0.05` thresholds over 10.3 years.
+Hold QQQ in proportion to how calm the market is: each day the target exposure is 20% divided by QQQ's trailing 21-day realised volatility, capped at 1.5x. Exposure below 1.0x leaves the rest in T-bills; exposure above 1.0x moves part of the QQQ position into QLD (2x daily Nasdaq-100 ETF). No margin, no options, no stock picking.
 
 ---
 
-## 2. Plain-Language Strategy Rules
+## 1. Verdict and weaknesses (read first)
 
-1. **Universe & Dual-Class Deduplication:** At each calendar quarter-end `Q_E` (`Mar 31`, `Jun 30`, `Sep 30`, `Dec 31`), restrict eligibility strictly to verified Nasdaq-100 constituents on `Q_E` via [`config/nasdaq100_pit_membership.json`](config/nasdaq100_pit_membership.json). Non-voting `GOOG` shares are excluded so Alphabet is counted once via `GOOGL`.
-2. **Causal Market-Cap Ranking:** Rank eligible constituents descending by `Close(Q_E) * SplitAdj_Shares_filed_on_or_before(Q_E)` using SEC EDGAR XBRL filings with `filed <= Q_E`.
-3. **Portfolio Weights & Drift:** Allocate `100%` proportionally by market cap across the top `K` stocks (`K = 8` default; `K = 16` optional broad variant). Reconstitute quarterly at `Open_{t+1}` after `Q_E`; between regime switches, share counts remain fixed so weights drift naturally with market cap (`w_i(t) ~ w_i(Q_E) * Close_i(t) / Close_i(Q_E)`).
-4. **Trend Filter & Cash Parking:** At each completed daily close `Close_{t-1}` (after `16:05 ET` live cutoff):
-   - If `QQQ Close_{t-1} > QQQ SMA200_{t-1}`: hold `100%` equity basket at `Open_t`.
-   - If `QQQ Close_{t-1} <= QQQ SMA200_{t-1}`: hold `100%` US Treasury Bills (`SGOV` live, `BIL` fallback; 1-day-lagged `FRED DTB3` in backtest) at `Open_t`.
-5. **No Leverage or Options:** `0% TQQQ`, `0% margin borrowing`, `0% option collars`.
+Over April 1999 to November 2026 the strategy returned **12.8% a year with a -54.9% maximum drawdown**, against **10.3% and -83.0% for QQQ** (total return), with next-open execution and 10 bps per dollar traded. It beat QQQ in 16 of 28 calendar years.
 
-```mermaid
-flowchart TD
-    A["Completed Daily Close (t-1 >= 16:05 ET)"] --> B{"QQQ Close_{t-1} > QQQ SMA200_{t-1}?"}
-    B -- "YES" --> C["Target: 100% PIT Top-K Cap-Weighted Basket (K=8 default, K=16 supported)"]
-    B -- "NO" --> D["Target: 100% US Treasury Bills (SGOV live / Lagged FRED DTB3 backtest)"]
-    C --> E{"Regime Switch OR Quarter Reconstitution?"}
-    D --> E
-    E -- "YES" --> F["Execute Rebalance at Next Official Open (09:30 ET Open_t)"]
-    E -- "NO" --> G["Hold Existing Shares (Zero Daily Trading)"]
-```
+Most of that edge comes from losing less in crashes, not from beating QQQ in normal markets:
+
+1. **It still falls hard in a crash.** The worst drawdown was -55% (2000–2002). At 60% volatility the rule still holds about a third of the portfolio in QQQ.
+2. **It lags fast recoveries.** After a crash, volatility stays high while prices rise, so exposure stays low: it trailed QQQ by 24 points in 1999, 15 in 2009 and 15 in 2020.
+3. **In calm bull decades it roughly matches QQQ.** 2015–2019: 16.7% vs 16.7%; 2023–2026: 26.9% vs 29.1%.
+4. **Parameters were chosen after looking at 2002–2026.** Only 1999–2002 was not used in the design. All 48 settings tried are reported (section 4); 45 beat QQQ on both return and drawdown, so no single setting carries the result.
+5. **Turnover is about 5.7x a year.** That matters in a taxable account and is not modelled here.
+6. **One market, few crashes.** The sample has one dot-com crash, one 2008, one 2020 and one 2022.
+
+Why it works at all: volatility clusters, so high volatility today usually means high volatility next month, but it does not mean higher returns. Cutting exposure when volatility is high removes a lot of risk and little return; leaning in when it is low adds return at low risk.
 
 ---
 
-## 3. Audited Historical Performance (`2016-06-30` to `2026-11-11`)
+## 2. Rules
 
-Generated by [`scripts/run_backtest.py`](scripts/run_backtest.py) starting from `\$100,000` (`Open_t` execution, pre-warmed 200-day SMA from `1999`, lagged `FRED DTB3` risk-free rate, Newey-West `maxlags=5` HAC `t`-statistics, two-way annualized turnover).
+1. After each completed daily close (16:05 ET or later), compute QQQ's realised volatility over the last 21 daily returns (annualised).
+2. Target exposure `w = min(1.5, 0.20 / volatility)`.
+3. Portfolio for exposure `w`:
+   - `w <= 1.0`: `w` in QQQ, `1 - w` in a T-bill ETF (SGOV; BIL fallback).
+   - `w > 1.0`: `2 - w` in QQQ and `w - 1` in QLD (for example 1.5x = 50% QQQ + 50% QLD).
+4. Trade at the next open only if `w` differs from the exposure currently held by 10 percentage points or more, or crosses 1.0x. Otherwise hold.
 
-### Full Sample (`2,607` Trading Sessions, `42` Quarters)
-
-| Strategy / Baseline | End `$100k` | CAGR | MaxDD | Sharpe | Beta | Alpha vs QQQ | `t` (QQQ) | Alpha vs Beta-Matched | `t` (BM) | 2-Way Turn | Ex-Best-10d |
-| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `QQQ` Total Return (Buy & Hold) | \$690,297 | 20.49% | -35.12% | 0.84 | 1.00 | 0.00% | — | -0.12% | -0.51 | 0.10x | 12.64% |
-| Beta-Matched `QQQ` (`63%` `QQQ` / `37%` `DTB3`) | \$395,612 | 14.19% | -22.93% | 0.84 | 0.63 | +0.09% | +0.64 | 0.00% | — | 0.14x | 9.61% |
-| Simple Baseline: `QQQ > 200d SMA` | \$481,810 | 16.38% | -23.35% | 0.84 | 0.58 | +3.33% | +1.05 | +3.05% | +0.99 | 4.05x | 12.05% |
-| Simple Baseline: `QQQ` 20% Vol-Target | \$556,460 | 18.01% | -27.82% | 0.89 | 0.75 | +1.66% | +1.08 | +1.48% | +1.02 | 1.42x | 13.68% |
-| Ablation: Passive PIT Top-8 (No MA) | \$978,381 | 24.61% | -44.15% | 0.89 | 1.10 | +2.28% | +1.03 | +2.15% | +0.98 | 0.24x | 15.79% |
-| Ablation: Passive PIT Top-16 (No MA) | \$839,292 | 22.78% | -42.00% | 0.86 | 1.08 | +0.94% | +0.61 | +0.81% | +0.52 | 0.35x | 14.25% |
-| `PIT Top-8 + QQQ 200d MA` (`10 bps`) | \$772,665 | 21.81% | -23.50% | 0.98 | 0.63 | +7.43% | +1.88 | +7.14% | +1.84 | 4.20x | 16.42% |
-| `PIT Top-8 + QQQ 200d MA` (`20 bps`) | \$739,750 | 21.30% | -23.80% | 0.96 | 0.63 | +7.01% | +1.76 | +6.71% | +1.72 | 4.20x | 15.93% |
-| `PIT Top-8 + QQQ 200d MA` (`30 bps`) | \$708,240 | 20.79% | -24.39% | 0.94 | 0.63 | +6.58% | +1.65 | +6.29% | +1.61 | 4.19x | 15.45% |
-| `PIT Top-16 + QQQ 200d MA` (`10 bps`) | \$633,798 | 19.50% | -23.13% | 0.91 | 0.62 | +5.51% | +1.51 | +5.21% | +1.46 | 4.28x | 14.55% |
-| `PIT Top-16 + QQQ 200d MA` (`20 bps`) | \$606,266 | 18.99% | -23.98% | 0.89 | 0.62 | +5.07% | +1.38 | +4.78% | +1.33 | 4.28x | 14.06% |
-| `PIT Top-16 + QQQ 200d MA` (`30 bps`) | \$579,932 | 18.48% | -25.04% | 0.87 | 0.63 | +4.64% | +1.26 | +4.35% | +1.20 | 4.28x | 13.57% |
-
-### Subperiod Split (`2016–2021` vs `2022–2026`, `10 bps`)
-
-| Strategy | `2016–2021` CAGR | `2016–2021` MaxDD | `2016–2021` Sharpe | `2022–2026` CAGR | `2022–2026` MaxDD | `2022–2026` Sharpe |
-| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `QQQ` Total Return (Buy & Hold) | 27.79% | -28.56% | 1.20 | 12.53% | -34.83% | 0.45 |
-| Simple Baseline: `QQQ > 200d SMA` | 20.98% | -23.35% | 1.10 | 11.19% | -19.90% | 0.50 |
-| Simple Baseline: `QQQ` 20% Vol-Target | 23.04% | -18.57% | 1.28 | 12.41% | -26.79% | 0.51 |
-| Ablation: Passive PIT Top-8 | 33.51% | -27.00% | 1.28 | 14.76% | -44.14% | 0.50 |
-| `PIT Top-8 + QQQ 200d MA` (`10 bps`) | 26.73% | -23.50% | 1.22 | 15.97% | -20.05% | 0.67 |
-| `PIT Top-16 + QQQ 200d MA` (`10 bps`) | 23.89% | -23.13% | 1.14 | 14.31% | -20.05% | 0.61 |
-
-Additional component ablation and rejection tests (legacy factor gates, TQQQ overlay, Black-Scholes collars, and intraday SIP buy/sell flow features) are documented in [`docs/Empirical_Audit_and_Ablation_Notes.md`](docs/Empirical_Audit_and_Ablation_Notes.md), and the full operational spec is in [`docs/Strategy_Specification.md`](docs/Strategy_Specification.md).
+All parameters live in [`config/strategy_config.yaml`](config/strategy_config.yaml) under `volatility_target`.
 
 ---
 
-## 4. Repository Structure & Quickstart
+## 3. Results by period (April 1999 to November 2026)
+
+Generated by [`scripts/run_voltarget_backtest.py`](scripts/run_voltarget_backtest.py): share-level simulation, signal at the previous close, trades at the next open, 10 bps per dollar traded, idle cash at the 1-day-lagged FRED 3-month T-bill rate. QLD's real prices are used from June 2006; before that a synthetic 2x fund (2x QQQ minus a 0.95% fee and T-bill + 0.5% financing), which matches real QLD's 2006–2026 return to within 0.1 point a year.
+
+### CAGR
+
+| Period | QQQ | QQQ 200-day rule | Vol target, max 1.0x | **Vol target, max 1.5x** |
+| :--- | :---: | :---: | :---: | :---: |
+| **Full 1999–2026** | **10.3%** | **7.7%** | **11.5%** | **12.8%** |
+| 1999–2002 dot-com crash | -19.8% | -8.1% | -6.8% | -6.8% |
+| 2003–2007 recovery | 15.5% | 8.6% | 13.9% | 13.5% |
+| 2008–2009 financial crisis | -4.3% | 8.5% | 0.9% | 0.7% |
+| 2010–2014 | 18.8% | 8.9% | 18.0% | 21.9% |
+| 2015–2019 | 16.7% | 6.3% | 15.4% | 16.7% |
+| 2020–2022 Covid and inflation bear | 7.9% | 12.0% | 5.7% | 7.6% |
+| 2023–2026 | 29.1% | 20.0% | 25.1% | 26.9% |
+
+### Maximum drawdown
+
+| Period | QQQ | QQQ 200-day rule | Vol target, max 1.0x | **Vol target, max 1.5x** |
+| :--- | :---: | :---: | :---: | :---: |
+| **Full 1999–2026** | **-83.0%** | **-51.2%** | **-54.9%** | **-54.9%** |
+| 1999–2002 | -83.0% | -46.7% | -54.9% | -54.9% |
+| 2003–2007 | -17.3% | -19.9% | -15.7% | -20.7% |
+| 2008–2009 | -49.4% | -14.5% | -33.6% | -33.7% |
+| 2010–2014 | -16.1% | -23.6% | -14.1% | -16.7% |
+| 2015–2019 | -22.8% | -27.0% | -17.1% | -20.9% |
+| 2020–2022 | -35.1% | -23.3% | -27.8% | -28.8% |
+| 2023–2026 | -22.8% | -14.8% | -19.1% | -22.6% |
+
+### Sharpe ratio
+
+| Period | QQQ | QQQ 200-day rule | Vol target, max 1.0x | **Vol target, max 1.5x** |
+| :--- | :---: | :---: | :---: | :---: |
+| **Full 1999–2026** | **0.42** | **0.40** | **0.59** | **0.59** |
+| 1999–2002 | -0.30 | -0.45 | -0.41 | -0.41 |
+| 2003–2007 | 0.72 | 0.40 | 0.70 | 0.58 |
+| 2008–2009 | 0.01 | 0.63 | 0.09 | 0.09 |
+| 2010–2014 | 1.07 | 0.64 | 1.15 | 1.11 |
+| 2015–2019 | 0.92 | 0.42 | 0.95 | 0.84 |
+| 2020–2022 | 0.38 | 0.65 | 0.34 | 0.41 |
+| 2023–2026 | 1.13 | 0.87 | 1.09 | 1.02 |
+
+### Calendar years (strategy vs QQQ)
+
+| Year | QQQ | Strategy | Diff | | Year | QQQ | Strategy | Diff |
+| :--- | ---: | ---: | ---: | :---: | :--- | ---: | ---: | ---: |
+| 1999 (from Apr) | 64.8% | 40.4% | -24.4 | | 2013 | 36.6% | 50.8% | +14.2 |
+| 2000 | -36.1% | -16.0% | +20.1 | | 2014 | 19.2% | 20.6% | +1.4 |
+| 2001 | -33.3% | -17.7% | +15.6 | | 2015 | 9.4% | 2.7% | -6.7 |
+| 2002 | -37.4% | -20.6% | +16.8 | | 2016 | 7.1% | 4.6% | -2.5 |
+| 2003 | 49.7% | 38.9% | -10.8 | | 2017 | 32.7% | 47.5% | +14.8 |
+| 2004 | 10.5% | 10.7% | +0.2 | | 2018 | -0.1% | -0.8% | -0.7 |
+| 2005 | 1.6% | -3.6% | -5.2 | | 2019 | 39.0% | 37.4% | -1.6 |
+| 2006 | 7.1% | 9.2% | +2.1 | | 2020 | 48.4% | 33.8% | -14.6 |
+| 2007 | 19.0% | 19.5% | +0.5 | | 2021 | 27.4% | 27.6% | +0.2 |
+| 2008 | -41.7% | -28.8% | +12.9 | | 2022 | -32.6% | -25.2% | +7.4 |
+| 2009 | 54.7% | 40.0% | -14.7 | | 2023 | 54.9% | 56.5% | +1.6 |
+| 2010 | 20.1% | 25.1% | +5.0 | | 2024 | 25.6% | 25.8% | +0.2 |
+| 2011 | 3.5% | -0.6% | -4.1 | | 2025 | 20.8% | 14.0% | -6.8 |
+| 2012 | 18.1% | 20.9% | +2.8 | | 2026 (to Nov 11) | 13.1% | 10.7% | -2.4 |
+
+Years beating QQQ: strategy 16 of 28; volatility target max 1.0x 9 of 28; QQQ 200-day rule 5 of 28.
+
+---
+
+## 4. Robustness
+
+**Costs and leverage method** (full period):
+
+| Variant | CAGR | Max drawdown | Sharpe | Turnover / yr |
+| :--- | :---: | :---: | :---: | :---: |
+| QLD for leverage, 10 bps (base case) | 12.8% | -54.9% | 0.59 | 5.7x |
+| QLD, 20 bps | 12.2% | -55.1% | 0.56 | 5.7x |
+| QLD, 30 bps | 11.5% | -55.3% | 0.53 | 5.8x |
+| Margin at T-bill + 0.3% (futures-like) | 13.3% | -54.9% | 0.61 | 3.8x |
+| Margin at T-bill + 1% | 13.2% | -54.9% | 0.60 | 3.7x |
+| Margin at T-bill + 2% | 13.0% | -54.9% | 0.59 | 3.7x |
+| No deadband (trade every day) | 12.6% | -52.4% | 0.58 | 9.7x |
+
+**Every setting tried:** 48 combinations of target volatility (15/20/25/30%), maximum exposure (1.0/1.25/1.5/2.0x) and lookback (10/21/63 days). CAGR ranged from 9.9% to 16.7% (median 12.7%) against QQQ's 10.3%; 45 of 48 beat QQQ on both return and maximum drawdown. Higher targets and caps raise return and drawdown together. Full grid: `data/outputs/voltarget_parameter_grid.csv`.
+
+---
+
+## 5. Previous strategy (v5.0.0) and why it was replaced
+
+v5.0.0 held the 8 largest Nasdaq-100 stocks by point-in-time market cap while QQQ was above its 200-day average, and T-bills otherwise. Over its own test window (2016-06 to 2026-11) it returned 21.8% vs QQQ's 20.5% with a -23.5% drawdown. An independent re-test on 2011–2016, which v5 never covered, returned 3.5% a year against QQQ's 14.1%: the 200-day rule whipsawed in 2011, 2015 and 2016, and the concentrated mega-cap basket fell hard in 2012–13. Over 2011–2026 it trailed QQQ on both return and Sharpe. Its edge depended on mega-cap leadership in one decade. Its code (`run_backtest.py`, `run_production_daily.py`, `rebuild_pit_rosters.py`), outputs and the Streamlit terminal are kept unchanged for reference; the terminal still shows v5 results. Component history is in [`docs/Empirical_Audit_and_Ablation_Notes.md`](docs/Empirical_Audit_and_Ablation_Notes.md).
+
+---
+
+## 6. Repository and commands
 
 ```text
 qqq_alpha_engine/
-├── .env.example                            # Template for Alpaca SIP keys & SEC User-Agent
-├── app.py                                  # Standalone Streamlit audit & live signal terminal
-├── pyproject.toml
-├── requirements.txt
-├── config/
-│   ├── nasdaq100_pit_membership.json       # Multi-interval PIT Nasdaq-100 constituent ledger
-│   ├── strategy_config.yaml                # Strategy v5.0.0 parameters
-│   └── universe_qqq.json                   # Deduplicated active constituent cap-weight snapshot
+├── config/strategy_config.yaml               # v6 volatility_target parameters (+ v5 reference keys)
 ├── data/
-│   ├── point_in_time_rosters.csv           # 42-quarter PIT Top-16 rosters (672 rows)
-│   ├── cache/
-│   │   ├── qqq_total_return_1999_2026.csv  # Pre-warmed Total-Return QQQ bar series
-│   │   ├── alpaca_sip_daily/               # Cached split-adjusted daily bars (204 symbols)
-│   │   └── fred_macro/DTB3.csv             # 3-month Treasury Bill secondary market rate
-│   └── outputs/
-│       ├── daily_nav_ledger.csv            # Daily strategy and baseline NAV curves
-│       ├── quarterly_performance_ledger.csv# 42-quarter comparison table
-│       ├── production_audit_summary.json   # Full, subperiod, cost sensitivity, and recent log
-│       └── production_daily_signals.json   # Latest completed-close live order tickets
+│   ├── cache/qqq_total_return_1999_2026.csv  # QQQ total-return daily open/close since 1999
+│   ├── cache/yahoo_daily/QLD.csv             # QLD daily prices since 2006 (Yahoo, adjusted)
+│   ├── cache/fred_macro/DTB3.csv             # 3-month T-bill rate
+│   └── outputs/voltarget_*.csv|json          # v6 backtest ledgers, period stats, grid, summary
+│       outputs/production_voltarget_signal.json  # latest v6 order ticket
 ├── docs/
-│   ├── Empirical_Audit_and_Ablation_Notes.md
-│   └── Strategy_Specification.md
 ├── scripts/
-│   ├── rebuild_pit_rosters.py              # Rebuilds PIT rosters from SEC XBRL filings + SIP bars
-│   ├── run_backtest.py                     # Runs Open_t share-level backtest and generates ledgers
-│   └── run_production_daily.py             # Generates daily close signal & next-open order tickets
-├── src/
-│   ├── clients/
-│   │   ├── alpaca_client.py                # Daily bars and snapshots client
-│   │   └── sec_edgar_client.py             # Point-in-time SEC XBRL share-count client
-│   └── ui/
-│       └── terminal.py                     # Interactive Plotly + Streamlit dashboard renderer
+│   ├── run_voltarget_backtest.py             # v6 backtest (this README's numbers)
+│   ├── run_production_voltarget.py           # v6 daily signal and order ticket
+│   └── run_backtest.py, run_production_daily.py, rebuild_pit_rosters.py   # v5 reference
 └── tests/
-    └── test_production_pit_ma200.py        # Integrity, warmup, cost monotonicity, and causality tests
+    ├── test_voltarget.py                     # v6: no look-ahead, cap, weights, costs, replay, saved-output check
+    └── test_production_pit_ma200.py          # v5 reference tests
 ```
-
-### Setup & Verification Commands
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env   # Optional: add APCA_API_KEY_ID / APCA_API_SECRET_KEY for live SIP updates
-
-# 1. Run automated integrity & causality tests
-python -m pytest tests/test_production_pit_ma200.py -v
-
-# 2. Reproduce full audit ledgers (runs offline using cached data/)
-python scripts/run_backtest.py
-
-# 3. Generate live daily signal & next-open ticket list (--top-k 8 or --top-k 16)
-python scripts/run_production_daily.py --capital 100000 --top-k 8
-
-# 4. Optional: rebuild 42-quarter PIT rosters (pass --offline to skip data.sec.gov fetches)
-python scripts/rebuild_pit_rosters.py --offline
-
-# 5. Launch the interactive audit and signal terminal
-python -m streamlit run app.py --server.port 8501 --server.headless true
+python -m pytest tests -v
+python scripts/run_voltarget_backtest.py
+python scripts/run_production_voltarget.py --capital 100000 --current-exposure 1.0
 ```
+
+`run_production_voltarget.py` needs to know the exposure you currently hold: pass `--current-exposure`, or your holdings as `--qqq-value/--qld-value/--cash-value`; otherwise it assumes the previous run's orders were filled. Live prices come from Alpaca if API keys are set in `.env`, otherwise from the cached files.

@@ -1,17 +1,39 @@
 # ============================================================================
-# QQQ Alpha Engine — Production Strategy Configuration
+# QQQ Alpha Engine — Strategy Configuration
 # ============================================================================
-# Plain-language rules:
-#   - Quarterly Point-in-Time Nasdaq-100 Cap-Weighted Basket (Top-8 default; Top-16 supported)
-#   - Daily QQQ 200-Day Simple Moving Average cash rule evaluated at completed Close_{t-1}
-#   - When QQQ Close > QQQ 200-Day SMA: 100% cap-weighted PIT basket (let weights drift intra-quarter)
-#   - When QQQ Close <= QQQ 200-Day SMA: 100% US Treasury Bills (SGOV/BIL live; lagged FRED DTB3 backtest)
-#   - Execution: next market open (09:30 ET Open_t); zero TQQQ, zero option collars, zero margin
+# ACTIVE STRATEGY (v6.0.0): Volatility-target QQQ
+#   - Each day, target exposure = min(1.5, 20% / trailing 21-day realised volatility of QQQ)
+#   - Up to 1.0x held in QQQ (rest in T-bills); above 1.0x, part of QQQ moves to QLD (2x) - no margin
+#   - Signal at the completed close, trade at the next open, only when the target moves 10+ points
+#     from the exposure held (or crosses 1.0x)
+#   - Scripts: scripts/run_voltarget_backtest.py, scripts/run_production_voltarget.py
+#
+# PREVIOUS STRATEGY (v5.0.0, kept for reference): quarterly PIT Top-8/Top-16 cap-weight + QQQ 200-day
+#   rule. Its scripts still read `portfolio_rules`, `trend_filter`, `cash_management` and
+#   `friction_model` below. It was replaced because it trailed QQQ over 2011-2016 (see README).
 # ============================================================================
 
-version: "5.0.0-pit-capweight-ma200"
-strategy_name: "Quarterly Point-in-Time Cap-Weight + QQQ 200-Day Moving Average Cash Rule"
+version: "6.0.0-qqq-voltarget-1.5x"
+strategy_name: "QQQ Volatility Target 20% (max 1.5x via QLD) with T-bill cash"
 
+volatility_target:
+  signal_symbol: "QQQ"
+  target_vol: 0.20
+  max_exposure: 1.5
+  lookback_days: 21
+  rebalance_deadband: 0.10
+  leverage_etf: "QLD"
+  tbill_etf: "SGOV"
+  tbill_etf_fallback: "BIL"
+  signal_evaluation: "completed_daily_close"
+  intraday_close_cutoff_et: "16:05"
+  execution_timing: "next_open"
+  backtest_cost_bps: 10.0
+  backtest_cash_series: "FRED_DTB3_LAGGED_1D"
+
+# ---------------------------------------------------------------------------
+# Previous strategy v5.0.0 (reference only)
+# ---------------------------------------------------------------------------
 portfolio_rules:
   default_top_k: 8
   supported_top_k: [8, 16]
