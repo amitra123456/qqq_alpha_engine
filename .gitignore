@@ -27,3 +27,7 @@ data/cache/sec_edgar/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Website intermediate data (site/dist is committed so it can be hosted directly) and large research price caches
+site/build/
+data/cache/yahoo_long/

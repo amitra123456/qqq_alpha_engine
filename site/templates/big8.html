@@ -1,0 +1,581 @@
+<title>Big Eight Weather Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+/* Dark-only by request. One calm column of instrument panels under a two-tab header; panels pair on wide screens. */
+:root {
+  color-scheme: dark;
+  --bg: #0b111b;
+  --surface: #131c2a;
+  --surface-2: #1a2537;
+  --surface-3: #22304a;
+  --fg: #e8eef7;
+  --muted: #98a6bc;
+  --line: #27354d;
+  --accent: #7aa7ff;
+  --accent-soft: #1b2b49;
+  --qqq: #8592a8;
+  --calm: #3fc48e;
+  --normal: #6aa8f5;
+  --choppy: #f2ad42;
+  --stormy: #f07070;
+  --font-display: "Sora", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --radius: 14px;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.5; margin: 0; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0; }
+b, strong { font-weight: 600; }
+.num { font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.brand h1 { font-size: 1.1rem; font-weight: 700; }
+.brand small { color: var(--muted); font-size: .85rem; }
+nav { display: flex; gap: 4px; background: var(--bg); padding: 4px; border-radius: 999px; border: 1px solid var(--line); }
+nav a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: .95rem; padding: 7px 16px; border-radius: 999px; }
+nav a[aria-current="page"] { background: var(--surface-3); color: var(--fg); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+main .wrap { display: grid; gap: 20px; padding-block: 24px 48px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: grid; gap: 16px; min-width: 0; align-content: start; }
+.panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.eyebrow { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.lede { color: var(--muted); max-width: 66ch; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+
+/* weather */
+.weather { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
+@media (max-width: 640px) { .weather { grid-template-columns: 1fr; gap: 14px; } }
+.regime-word { font-family: var(--font-display); font-size: clamp(2.4rem, 7vw, 3.6rem); font-weight: 700; line-height: 1; color: var(--reg); }
+.regime-sub { color: var(--muted); font-size: .92rem; margin-top: 6px; }
+.weather-text { display: grid; gap: 12px; min-width: 0; }
+.weather-text .big { font-size: 1.12rem; }
+.gauge { display: grid; gap: 6px; }
+.gauge-bar { position: relative; height: 14px; border-radius: 999px; display: flex; overflow: visible; }
+.gauge-bar span { height: 100%; }
+.gauge-bar span:first-child { border-radius: 999px 0 0 999px; } .gauge-bar span:nth-child(4) { border-radius: 0 999px 999px 0; }
+.gauge-marker { position: absolute; top: -5px; width: 4px; height: 24px; background: var(--fg); border-radius: 2px; transform: translateX(-2px); box-shadow: 0 0 0 2px var(--surface); }
+.gauge-labels { position: relative; height: 18px; font-size: .78rem; color: var(--muted); }
+.gauge-labels span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.strip { display: grid; gap: 6px; }
+.strip-bar { display: flex; height: 18px; border-radius: 6px; overflow: hidden; }
+.strip-bar i { flex: 1; }
+.strip-axis { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); }
+
+/* split bar */
+.split { display: grid; gap: 10px; }
+.split-bar { display: flex; height: 26px; border-radius: 8px; overflow: hidden; background: var(--surface-2); }
+.split-bar span { height: 100%; display: flex; align-items: center; padding-inline: 10px; font-size: .85rem; font-weight: 700; white-space: nowrap; overflow: hidden; color: #0b111b; }
+.split-keys { display: flex; gap: 18px; flex-wrap: wrap; font-size: .92rem; color: var(--muted); }
+.split-keys b { color: var(--fg); font-family: var(--font-display); }
+
+/* holdings */
+.mixbar { display: flex; height: 20px; border-radius: 7px; overflow: hidden; background: var(--surface-2); gap: 2px; }
+.mixbar span { height: 100%; }
+.hold-list { display: grid; }
+.holding { display: grid; grid-template-columns: 12px 1fr auto; gap: 2px 12px; align-items: center; padding-block: 10px; border-top: 1px solid var(--line); }
+.holding:first-child { border-top: 0; }
+.swatch { width: 12px; height: 12px; border-radius: 3px; }
+.holding .name { font-weight: 600; }
+.holding .tick { color: var(--muted); font-weight: 500; font-size: .9rem; margin-left: 6px; }
+.holding .pct { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; text-align: right; }
+.holding .bar { grid-column: 2 / 4; height: 4px; border-radius: 2px; background: var(--surface-2); overflow: hidden; }
+.holding .bar i { display: block; height: 100%; }
+.holding.cash { margin-top: 4px; border-top: 1px dashed var(--line); }
+.holding .desc { grid-column: 2 / 4; color: var(--muted); font-size: .88rem; }
+
+/* calculator */
+.amount { display: flex; align-items: center; border: 1.5px solid var(--line); border-radius: 12px; background: var(--bg); overflow: hidden; }
+.amount:focus-within { border-color: var(--accent); }
+.amount span { padding: 0 4px 0 14px; font-family: var(--font-display); font-size: 1.4rem; color: var(--muted); }
+.amount input { border: 0; background: transparent; color: var(--fg); font: 600 1.5rem var(--font-display); padding: 12px 14px 12px 2px; width: 100%; min-width: 0; outline: none; }
+.quick { display: flex; gap: 8px; flex-wrap: wrap; }
+.quick button, .chip { border: 1px solid var(--line); background: var(--surface-2); color: var(--fg); border-radius: 999px; padding: 6px 12px; font: 600 .88rem var(--font-body); cursor: pointer; }
+.quick button:hover, .chip:hover { border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #0b111b; }
+.seg { display: inline-flex; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; }
+.seg button { border: 0; background: transparent; color: var(--muted); border-radius: 999px; padding: 5px 12px; font: 600 .86rem var(--font-body); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface-3); color: var(--fg); }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 9px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+tbody tr:hover td { background: color-mix(in srgb, var(--surface-2) 60%, transparent); }
+tfoot td { font-weight: 700; border-bottom: 0; }
+.scroll { overflow-x: auto; }
+.btn { border: 0; background: var(--accent); color: #0b111b; border-radius: 10px; padding: 10px 16px; font: 700 .95rem var(--font-body); cursor: pointer; justify-self: start; }
+.note { font-size: .88rem; color: var(--muted); }
+.callout { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 12px; padding: 12px 14px; font-size: .95rem; }
+.callout.warn { background: color-mix(in srgb, var(--choppy) 12%, var(--surface)); border-color: color-mix(in srgb, var(--choppy) 40%, transparent); }
+
+/* performance */
+.range { display: grid; gap: 10px; }
+.range-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; font-weight: 600; }
+.dual { position: relative; height: 28px; }
+.dual input { position: absolute; inset: 0; width: 100%; margin: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; height: 28px; }
+.dual input::-webkit-slider-thumb { pointer-events: auto; -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); cursor: pointer; position: relative; z-index: 2; }
+.dual input::-moz-range-thumb { pointer-events: auto; width: 18px; height: 18px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); cursor: pointer; }
+.dual input::-moz-range-track { background: transparent; }
+.dual .track { position: absolute; left: 0; right: 0; top: 12px; height: 4px; border-radius: 2px; background: var(--line); }
+.dual .fill { position: absolute; top: 12px; height: 4px; border-radius: 2px; background: var(--accent); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
+.stat { background: var(--surface-2); border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; }
+.stat .label { font-size: .85rem; color: var(--muted); font-weight: 600; }
+.stat .pair { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.stat .pair b { font-family: var(--font-display); font-size: 1.2rem; }
+.stat .pair small { color: var(--muted); }
+.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: .9rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 18px; height: 3px; border-radius: 2px; display: inline-block; }
+.chart { position: relative; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--bg); font-size: .82rem; padding: 6px 9px; border-radius: 8px; white-space: nowrap; transform: translate(-50%, -110%); font-weight: 600; }
+.verdict { font-size: 1.02rem; }
+.good { color: var(--calm); } .bad { color: var(--stormy); }
+
+/* strategy page */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; }
+@media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+.step { display: grid; gap: 6px; align-content: start; }
+.step::before { counter-increment: step; content: counter(step); font-family: var(--font-display); font-weight: 700; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.step h3 { font-size: 1rem; font-weight: 600; }
+.step p { color: var(--muted); }
+.regime-cell { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.regime-cell::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--reg); }
+.cards { display: grid; gap: 12px; }
+.cards > div { background: var(--surface-2); border-radius: 12px; padding: 14px; display: grid; gap: 4px; align-content: start; }
+.cards b { font-family: var(--font-display); font-weight: 600; }
+.cards p { color: var(--muted); font-size: .95rem; }
+.diff-pos { color: var(--calm); font-weight: 600; } .diff-neg { color: var(--stormy); font-weight: 600; }
+.log-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+select { font: 600 .95rem var(--font-body); padding: 7px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); color: var(--fg); }
+.arrow { color: var(--muted); }
+.tag { display: inline-block; font-size: .8rem; font-weight: 700; border-radius: 6px; padding: 1px 7px; margin: 1px 2px; }
+.tag.in { background: color-mix(in srgb, var(--calm) 18%, transparent); color: var(--calm); }
+.tag.out { background: color-mix(in srgb, var(--stormy) 18%, transparent); color: var(--stormy); }
+.tag.plain { background: var(--surface-3); color: var(--fg); font-weight: 600; }
+td.wrapcell { white-space: normal; text-align: left; }
+footer { color: var(--muted); font-size: .85rem; }
+footer .wrap { padding-block: 0 40px; display: grid; gap: 8px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><h1>Big Eight Weather Plan</h1><small id="asof-head"></small></div>
+    <nav aria-label="Pages">
+      <a href="#today" id="tab-today">Today</a>
+      <a href="#history" id="tab-history">How it works &amp; history</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- PAGE 1: TODAY -->
+  <section id="page-today" class="wrap">
+    <div class="panel" id="weather-panel">
+      <div class="panel-head"><span class="eyebrow">Market weather</span><span class="note" id="weather-date"></span></div>
+      <div class="weather">
+        <div><div class="regime-word" id="regime-word"></div><div class="regime-sub num" id="regime-sub"></div></div>
+        <div class="weather-text">
+          <p class="big" id="weather-sentence"></p>
+          <div class="gauge" aria-hidden="true">
+            <div class="gauge-bar" id="gauge-bar"></div>
+            <div class="gauge-labels" id="gauge-labels"></div>
+          </div>
+        </div>
+      </div>
+      <div class="split">
+        <span class="eyebrow">Today's split</span>
+        <div class="split-bar" id="split-bar" role="img"></div>
+        <div class="split-keys" id="split-keys"></div>
+      </div>
+      <div class="strip">
+        <span class="eyebrow">Weather over the last 12 months</span>
+        <div class="strip-bar" id="strip" role="img"></div>
+        <div class="strip-axis"><span id="strip-start"></span><span>today</span></div>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="panel">
+        <div class="panel-head"><h2>What to hold today</h2><span class="note" id="lineup-note"></span></div>
+        <div class="mixbar" id="mixbar" role="img"></div>
+        <div class="hold-list" id="holdings"></div>
+        <p class="callout" id="held-note"></p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2>How much to buy</h2></div>
+        <label for="amount" class="note">Amount you are investing</label>
+        <div class="amount"><span>$</span><input id="amount" inputmode="decimal" value="10,000" autocomplete="off"></div>
+        <div class="quick" id="quick"></div>
+        <div class="scroll"><table id="calc"></table></div>
+        <button class="btn" id="copy">Copy order list</button>
+        <p class="note" id="calc-note"></p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>How it would have done</h2><span class="note">Growth of $10,000, after trading costs, dividends reinvested</span></div>
+      <div class="range">
+        <div class="range-row"><span id="range-label" class="num"></span><div class="quick" id="presets"></div></div>
+        <div class="dual"><div class="track"></div><div class="fill" id="fill"></div>
+          <input type="range" id="r-start" aria-label="Start month">
+          <input type="range" id="r-end" aria-label="End month">
+        </div>
+      </div>
+      <p class="verdict" id="verdict"></p>
+      <div class="stats" id="stats"></div>
+      <div class="legend"><span><i style="background: var(--accent)"></i>Big Eight Weather Plan</span><span><i style="background: var(--qqq)"></i>Just holding QQQ</span></div>
+      <div class="chart" id="chart"></div>
+      <p class="note">Simulated from real prices since February 2011, with the plan's rules applied day by day and the line-up chosen only from information available at each quarter-end. These are not results of real accounts, and past results do not predict future ones.</p>
+    </div>
+  </section>
+
+  <!-- PAGE 2: HOW IT WORKS & HISTORY -->
+  <section id="page-history" class="wrap" hidden>
+    <div class="panel">
+      <span class="eyebrow">The idea in one line</span>
+      <h2 style="font-size:1.5rem">Own the eight biggest Nasdaq companies, and hold less of them when the market gets stormy.</h2>
+      <p class="lede">A handful of giant companies drive most of the Nasdaq-100's gains. The plan owns just the eight largest, sized by how big each one is. It never uses borrowed money. When prices start swinging wildly, it moves part of the money into a Treasury bill fund and waits for calmer weather. You never research stocks or read the news.</p>
+      <div class="steps">
+        <div class="step"><h3>Pick the eight</h3><p>After the last trading day of each quarter, list the Nasdaq-100 members by company value (share price × shares). Keep the top eight.</p></div>
+        <div class="step"><h3>Size them by value</h3><p>Each company gets a share in proportion to its value. Bigger companies get more. In between quarters, let the weights drift.</p></div>
+        <div class="step"><h3>Check the weather</h3><p>Measure how much QQQ moved each day over the last month, as a yearly swing. Invested share = 20% ÷ that swing, never more than 100%.</p></div>
+        <div class="step"><h3>Trade only on real changes</h3><p>Buy or sell at the next morning's open, only when the invested share moved 10 points or more. Everything else goes into the T-bill fund.</p></div>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="panel">
+        <h2>What each kind of weather means</h2>
+        <div class="scroll"><table id="regime-table"></table></div>
+        <p class="note">Swing is QQQ's daily moves over the last 21 trading days, scaled to a year. Share of days is February 2011 to today.</p>
+      </div>
+      <div class="panel">
+        <h2>What to expect</h2>
+        <div class="cards">
+          <div><b>It is a bet on the giants</b><p>The edge over QQQ came from the biggest companies beating the rest, mostly from 2016 on. In 2011, 2013, 2020, 2025 and 2026 so far it trailed QQQ. If the giants stop leading, expect to lag.</p></div>
+          <div><b>It does not avoid big losses</b><p>The worst fall was about 34%, close to QQQ's 35%. The weather rule trims risk in choppy markets but eight stocks swing more than a 100-stock fund.</p></div>
+          <div><b>Only about 15 years of history</b><p>The test starts in 2011. It has never been through a crash like 2000 to 2002, when the biggest tech names fell 80% or more.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Year by year</h2>
+      <p class="note" id="years-summary"></p>
+      <div class="scroll"><table id="years"></table></div>
+    </div>
+
+    <div class="panel">
+      <h2>By market period</h2>
+      <div class="scroll"><table id="periods"></table></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Line-up history</h2>
+        <div class="log-controls">
+          <div class="seg" role="group" aria-label="Line-up view"><button data-lv="changes" aria-pressed="true">Changes only</button><button data-lv="all" aria-pressed="false">Every quarter</button></div>
+        </div>
+      </div>
+      <p class="note" id="lineup-summary"></p>
+      <div class="scroll"><table id="lineups"></table></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Weather trade history</h2>
+        <div class="log-controls"><label for="log-year" class="note">Year</label><select id="log-year"></select></div>
+      </div>
+      <p class="note" id="log-summary"></p>
+      <div class="scroll"><table id="log"></table></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Data as of the market close on <span id="asof-foot"></span>. Holdings update only when this page is refreshed with new data.</p>
+    <p>This page explains a rules-based approach for education. It is not personal financial advice. Holding only eight stocks is riskier than holding a broad fund, and you can lose money. Consider your own situation or speak to a licensed adviser before investing.</p>
+  </div>
+</footer>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const $ = id => document.getElementById(id);
+const fmt$ = v => '$' + Math.round(v).toLocaleString('en-US');
+const fmtPct = (v, d = 1) => (v > 0 ? '+' : '') + v.toFixed(d) + '%';
+const REG = { Calm: '--calm', Normal: '--normal', Choppy: '--choppy', Stormy: '--stormy' };
+const regOf = v => v >= 40 ? 'Stormy' : v >= 25 ? 'Choppy' : v >= 15 ? 'Normal' : 'Calm';
+const dt = s => new Date(s + 'T12:00:00');
+const dateLong = s => dt(s).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const dateShort = s => dt(s).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+const dateMd = s => dt(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+const COLORS = ['#7aa7ff', '#3fc48e', '#f2ad42', '#c792ff', '#4fd3dc', '#f483b3', '#e3d35c', '#a9bddc'];
+const nameOf = t => D.names[t] || t;
+const INV = D.invested;
+const HOLD = D.stocks.map((s, k) => ({ ...s, color: COLORS[k], pct: INV * s.basket }));
+const CASH = { t: 'SGOV', n: 'Treasury bill fund', color: 'var(--qqq)', pct: (1 - INV) * 100, px: D.sgov };
+
+/* ---------- routing ---------- */
+function route() {
+  const h = location.hash === '#history' ? 'history' : 'today';
+  $('page-today').hidden = h !== 'today'; $('page-history').hidden = h !== 'history';
+  $('tab-today').setAttribute('aria-current', h === 'today' ? 'page' : 'false');
+  $('tab-history').setAttribute('aria-current', h === 'history' ? 'page' : 'false');
+  if (h === 'today') drawChart();
+}
+window.addEventListener('hashchange', route);
+
+/* ---------- weather ---------- */
+function renderWeather() {
+  const reg = D.regime;
+  $('weather-panel').style.setProperty('--reg', `var(${REG[reg]})`);
+  $('regime-word').textContent = reg;
+  $('regime-sub').textContent = `QQQ swing ${D.vol}% a year`;
+  $('asof-head').textContent = 'as of ' + dateShort(D.asOf);
+  $('weather-date').textContent = 'Market close, ' + dateLong(D.asOf);
+  $('asof-foot').textContent = dateLong(D.asOf);
+  const inv = Math.round(INV * 100);
+  $('weather-sentence').textContent = {
+    Calm: `The market has been moving gently. The plan is fully invested in the eight stocks.`,
+    Normal: `The market has been moving at a typical pace. The plan holds ${inv}% in the eight stocks and the rest in a T-bill fund.`,
+    Choppy: `The market has been swinging more than usual. The plan holds ${inv}% in the eight stocks and parks the other ${100 - inv}% in a T-bill fund until things calm down.`,
+    Stormy: `The market has been swinging hard. The plan holds only ${inv}% in the eight stocks and keeps the other ${100 - inv}% safe in a T-bill fund.`
+  }[reg];
+  const max = 60, zones = [['Calm', 0, 15], ['Normal', 15, 25], ['Choppy', 25, 40], ['Stormy', 40, max]];
+  $('gauge-bar').innerHTML = zones.map(([r, a, b]) => `<span style="width:${(b - a) / max * 100}%;background:var(${REG[r]});opacity:.8"></span>`).join('') +
+    `<div class="gauge-marker" style="left:${Math.min(D.vol, max) / max * 100}%"></div>`;
+  $('gauge-labels').innerHTML = [0, 15, 25, 40, 60].map(v => `<span style="left:${v / max * 100}%${v === 0 ? ';transform:none' : v === 60 ? ';transform:translateX(-100%)' : ''}">${v === 60 ? '60%+' : v + '%'}</span>`).join('');
+  $('split-bar').innerHTML = `<span style="width:${inv}%;background:var(--accent)">${inv}% stocks</span><span style="width:${100 - inv}%;background:var(--qqq)">${100 - inv}% T-bills</span>`;
+  $('split-bar').setAttribute('aria-label', `${inv}% in the eight stocks, ${100 - inv}% in T-bills`);
+  $('split-keys').innerHTML = `<span>Invested share: <b class="num">${inv}%</b></span><span>Rule: 20% ÷ ${D.vol}% swing = ${(20 / D.vol * 100).toFixed(0)}%${20 / D.vol > 1 ? ', capped at 100%' : ''}</span>`;
+  const strip = D.volStrip;
+  $('strip').innerHTML = strip.map(([d, v]) => `<i style="background:var(${REG[regOf(v)]})" title="${d}: ${regOf(v)} (${v}%)"></i>`).join('');
+  $('strip').setAttribute('aria-label', 'Daily market weather over the last 12 months');
+  $('strip-start').textContent = dateShort(strip[0][0]);
+}
+
+/* ---------- holdings & calculator ---------- */
+function renderHoldings() {
+  $('lineup-note').textContent = `Line-up chosen ${dateLong(D.lineupQuarter)}`;
+  $('mixbar').innerHTML = [...HOLD, CASH].map(h => `<span style="width:${h.pct}%;background:${h.color}"></span>`).join('');
+  $('mixbar').setAttribute('aria-label', [...HOLD, CASH].map(h => `${h.t} ${h.pct.toFixed(1)}%`).join(', '));
+  const maxPct = Math.max(...HOLD.map(h => h.pct));
+  $('holdings').innerHTML = HOLD.map(h => `
+    <div class="holding">
+      <span class="swatch" style="background:${h.color}"></span>
+      <span><span class="name">${h.n}</span><span class="tick">${h.t}</span></span>
+      <span class="pct num">${h.pct.toFixed(1)}%</span>
+      <span class="bar"><i style="width:${h.pct / maxPct * 100}%;background:${h.color}"></i></span>
+    </div>`).join('') + `
+    <div class="holding cash">
+      <span class="swatch" style="background:${CASH.color}"></span>
+      <span><span class="name">${CASH.n}</span><span class="tick">SGOV</span></span>
+      <span class="pct num">${CASH.pct.toFixed(1)}%</span>
+      <span class="desc">Short-term US government debt. Works like cash that earns interest.</span>
+    </div>`;
+  const diff = (INV - D.held) * 100;
+  const next = nextQuarterEnd(D.asOf);
+  $('held-note').innerHTML = (Math.abs(diff) >= 10
+    ? `<b>Already following the plan?</b> You hold about ${Math.round(D.held * 100)}% in stocks. Today's target is ${Math.round(INV * 100)}%, ${Math.abs(diff).toFixed(1)} points away, so rebalance to this mix at the next open.`
+    : `<b>Already following the plan?</b> After the ${dateLong(D.lastTrade)} trade you hold about ${Math.round(D.held * 100)}% in stocks. Today's target of ${Math.round(INV * 100)}% is only ${Math.abs(diff).toFixed(1)} points away, under 10, so the rules say make no trade.`) +
+    ` Next line-up check: after the close on ${dateLong(next)}.`;
+  renderCalc();
+}
+function nextQuarterEnd(s) {
+  const d = dt(s), y = d.getFullYear(), m = d.getMonth();
+  const qm = [2, 5, 8, 11].find(x => x >= m) ?? 2, yy = qm < m ? y + 1 : y;
+  const last = new Date(yy, qm + 1, 0); // last calendar day; markets may close a day earlier
+  return last.toISOString().slice(0, 10);
+}
+function amount() { const v = parseFloat(String($('amount').value).replace(/[^0-9.]/g, '')); return isFinite(v) && v > 0 ? v : 0; }
+let calcMode = 'frac';
+function renderCalc() {
+  const amt = amount(); let rows = '', spent = 0; const lines = [];
+  [...HOLD, CASH].forEach(h => {
+    const dollars = amt * h.pct / 100, whole = Math.floor(dollars / h.px);
+    const sh = calcMode === 'frac' ? dollars / h.px : whole, cost = calcMode === 'frac' ? dollars : whole * h.px;
+    spent += cost;
+    const shTxt = calcMode === 'frac' ? sh.toFixed(3) : whole.toLocaleString('en-US');
+    if (cost > 0) lines.push(calcMode === 'frac' ? `Buy ${fmt$(dollars)} of ${h.t} (about ${shTxt} shares)` : `Buy ${whole} ${h.t} (about ${fmt$(cost)})`);
+    rows += `<tr><td><b>${h.t}</b></td><td>${fmt$(dollars)}</td><td>${shTxt}</td><td>$${h.px.toFixed(2)}</td></tr>`;
+  });
+  $('calc').innerHTML = `<thead><tr><th>Buy</th><th>Amount</th><th>Shares</th><th>Price</th></tr></thead><tbody>${rows}</tbody>` +
+    (calcMode === 'whole' ? `<tfoot><tr><td>Left over as cash</td><td>${fmt$(amt - spent)}</td><td></td><td></td></tr></tfoot>` : '');
+  $('calc-note').innerHTML = (calcMode === 'frac'
+    ? `Most brokers let you buy by dollar amount (fractional shares). Enter the <b>Amount</b> column. `
+    : `Whole shares are rounded down, so small amounts can leave a lot uninvested. Put leftovers in SGOV. `) +
+    `Prices are ${dateLong(D.asOf)} closes. Place orders for the next market open.`;
+  $('copy').dataset.text = `Big Eight Weather Plan for ${fmt$(amt)} (prices as of ${D.asOf}, ${Math.round(INV * 100)}% stocks):\n` + lines.join('\n');
+}
+$('amount').addEventListener('input', renderCalc);
+$('amount').addEventListener('blur', () => { const a = amount(); $('amount').value = a ? a.toLocaleString('en-US') : ''; });
+$('quick').innerHTML = [1000, 5000, 10000, 50000].map(v => `<button data-v="${v}">${fmt$(v)}</button>`).join('') +
+  `<span class="seg" role="group" aria-label="Share type" style="margin-left:auto"><button data-cm="frac" aria-pressed="true">By dollar</button><button data-cm="whole" aria-pressed="false">Whole shares</button></span>`;
+$('quick').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.cm) { calcMode = b.dataset.cm; $('quick').querySelectorAll('[data-cm]').forEach(c => c.setAttribute('aria-pressed', c === b ? 'true' : 'false')); renderCalc(); return; }
+  $('amount').value = Number(b.dataset.v).toLocaleString('en-US'); renderCalc();
+});
+$('copy').addEventListener('click', () => {
+  const t = $('copy').dataset.text;
+  const done = () => { $('copy').textContent = 'Copied'; setTimeout(() => $('copy').textContent = 'Copy order list', 1600); };
+  try { navigator.clipboard.writeText(t).then(done, () => fallbackCopy(t, done)); } catch (e) { fallbackCopy(t, done); }
+});
+function fallbackCopy(t, done) { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} ta.remove(); }
+
+/* ---------- performance ---------- */
+const S = D.series, start0 = dt(S.start);
+const dates = S.day.map(d => new Date(start0.getTime() + d * 864e5));
+const months = [];
+dates.forEach((d, i) => { if (i === 0 || d.getMonth() !== dates[i - 1].getMonth()) months.push(i); });
+const rs = $('r-start'), re = $('r-end');
+rs.min = re.min = 0; rs.max = re.max = months.length - 1; rs.step = re.step = 1;
+rs.value = 0; re.value = months.length - 1;
+const iso = d => d.toISOString().slice(0, 10);
+function idxRange() {
+  const a = +rs.value, b = +re.value;
+  const i = months[a], j = b === months.length - 1 ? dates.length - 1 : months[b + 1] - 1;
+  return [i, j, a, b];
+}
+function seriesStats(arr, i, j) {
+  const yrs = (dates[j] - dates[i]) / (365.25 * 864e5);
+  let peak = arr[i], dd = 0;
+  for (let k = i; k <= j; k++) { if (arr[k] > peak) peak = arr[k]; dd = Math.min(dd, arr[k] / peak - 1); }
+  const tot = arr[j] / arr[i];
+  return { end: 10000 * tot, cagr: (Math.pow(tot, 1 / yrs) - 1) * 100, dd: dd * 100, yrs };
+}
+function drawChart() {
+  if ($('page-today').hidden) return;
+  const [i, j, a, b] = idxRange();
+  $('fill').style.left = (a / (months.length - 1) * 100) + '%';
+  $('fill').style.right = (100 - b / (months.length - 1) * 100) + '%';
+  $('range-label').textContent = `${dateShort(iso(dates[i]))} to ${dateShort(iso(dates[j]))}`;
+  const s = S.plan, q = S.qqq, st = seriesStats(s, i, j), qt = seriesStats(q, i, j);
+  const diff = st.end - qt.end;
+  $('verdict').innerHTML = `Over these ${st.yrs.toFixed(1)} years, $10,000 would have grown to <b class="num">${fmt$(st.end)}</b> with the plan and <b class="num">${fmt$(qt.end)}</b> holding QQQ, ` +
+    (diff >= 0 ? `<span class="good">${fmt$(diff)} more</span>` : `<span class="bad">${fmt$(-diff)} less</span>`) + '.';
+  const stat = (label, a1, a2, f) => `<div class="stat"><span class="label">${label}</span>
+    <div class="pair"><small>Plan</small><b class="num">${f(a1)}</b></div><div class="pair"><small>QQQ</small><b class="num" style="color:var(--muted)">${f(a2)}</b></div></div>`;
+  $('stats').innerHTML = stat('Ending value', st.end, qt.end, fmt$) + stat('Average yearly return', st.cagr, qt.cagr, v => fmtPct(v)) + stat('Worst drop from a high', st.dd, qt.dd, v => v.toFixed(1) + '%');
+  const W = 960, H = 320, L = 64, R = 16, T = 12, B = 30, n = j - i + 1, stepN = Math.max(1, Math.floor(n / 480));
+  const pts = []; for (let k = i; k <= j; k += stepN) pts.push(k); if (pts[pts.length - 1] !== j) pts.push(j);
+  const vs = pts.map(k => [10000 * s[k] / s[i], 10000 * q[k] / q[i]]);
+  const all = vs.flat(), lo = Math.min(...all), hi = Math.max(...all);
+  const lg = hi / lo > 4;
+  const tf = v => lg ? Math.log(v) : v, ymin = tf(lo * 0.97), ymax = tf(hi * 1.03);
+  const X = k => L + (dates[k] - dates[i]) / (dates[j] - dates[i]) * (W - L - R);
+  const Y = v => T + (1 - (tf(v) - ymin) / (ymax - ymin)) * (H - T - B);
+  const path = c => pts.map((k, m) => (m ? 'L' : 'M') + X(k).toFixed(1) + ' ' + Y(vs[m][c]).toFixed(1)).join(' ');
+  let ticks = [];
+  if (lg) { for (const base of [1e3, 1e4, 1e5, 1e6]) for (const m of [1, 2, 5]) { const v = base * m; if (v >= lo * 0.97 && v <= hi * 1.03) ticks.push(v); } }
+  else { const span = hi - lo, p10 = Math.pow(10, Math.floor(Math.log10(span / 4))), stepV = p10 * ([1, 2, 5].find(m => span / (p10 * m) <= 6) || 10); for (let v = Math.ceil(lo / stepV) * stepV; v <= hi; v += stepV) ticks.push(v); }
+  if (ticks.length > 7) ticks = ticks.filter((_, k) => k % 2 === 0);
+  const yrSpan = (dates[j] - dates[i]) / (365.25 * 864e5), yStep = yrSpan > 9 ? 2 : yrSpan > 2.5 ? 1 : 0;
+  const xt = [];
+  if (yStep) { for (let y = dates[i].getFullYear() + 1; y <= dates[j].getFullYear(); y++) if (y % yStep === 0) { const d = new Date(y, 0, 1); xt.push([L + (d - dates[i]) / (dates[j] - dates[i]) * (W - L - R), String(y)]); } }
+  else { for (let m = 0; m < months.length; m++) { const k = months[m]; if (k > i && k <= j && dates[k].getMonth() % 3 === 0) xt.push([X(k), dates[k].toLocaleDateString('en-US', { month: 'short', year: '2-digit' })]); } }
+  const fmtTick = v => v >= 1e6 ? '$' + (v / 1e6).toFixed(v % 1e6 ? 1 : 0) + 'M' : v >= 1e3 ? '$' + Math.round(v / 1e3) + 'k' : '$' + Math.round(v);
+  const area = path(0) + ` L${X(j).toFixed(1)} ${H - B} L${X(i).toFixed(1)} ${H - B} Z`;
+  $('chart').innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Growth of $10,000: plan versus QQQ">
+    <defs><linearGradient id="ga" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".22"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+    ${ticks.map(v => `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${L - 8}" y="${Y(v) + 4}" text-anchor="end" font-size="12" fill="var(--muted)">${fmtTick(v)}</text>`).join('')}
+    ${xt.map(([x, t]) => `<text x="${x}" y="${H - 8}" text-anchor="middle" font-size="12" fill="var(--muted)">${t}</text>`).join('')}
+    <path d="${area}" fill="url(#ga)" stroke="none"/>
+    <path d="${path(1)}" fill="none" stroke="var(--qqq)" stroke-width="2" stroke-dasharray="5 4"/>
+    <path d="${path(0)}" fill="none" stroke="var(--accent)" stroke-width="2.6"/>
+    <circle cx="${X(j)}" cy="${Y(vs[vs.length - 1][0])}" r="4.5" fill="var(--accent)"/>
+    <circle cx="${X(j)}" cy="${Y(vs[vs.length - 1][1])}" r="4" fill="var(--qqq)"/>
+    <line id="hover-line" x1="0" x2="0" y1="${T}" y2="${H - B}" stroke="var(--muted)" stroke-width="1" visibility="hidden"/>
+    <rect x="${L}" y="${T}" width="${W - L - R}" height="${H - T - B}" fill="transparent"/>
+    </svg><div class="tip" id="tip" hidden></div>`;
+  const svg = $('chart').querySelector('svg'), tip = $('tip'), hl = $('hover-line');
+  svg.addEventListener('pointermove', ev => {
+    const r = svg.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * W;
+    let m = Math.round((x - L) / (W - L - R) * (pts.length - 1)); m = Math.max(0, Math.min(pts.length - 1, m));
+    const k = pts[m], px = X(k);
+    hl.setAttribute('x1', px); hl.setAttribute('x2', px); hl.setAttribute('visibility', 'visible');
+    tip.hidden = false; tip.style.left = Math.min(Math.max(px / W * r.width, 110), r.width - 110) + 'px'; tip.style.top = (Y(Math.max(vs[m][0], vs[m][1])) / H * r.height) + 'px';
+    tip.textContent = `${dates[k].toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} · Plan ${fmt$(vs[m][0])} · QQQ ${fmt$(vs[m][1])}`;
+  });
+  svg.addEventListener('pointerleave', () => { tip.hidden = true; hl.setAttribute('visibility', 'hidden'); });
+}
+const PRESETS = [['1 yr', 1], ['3 yrs', 3], ['5 yrs', 5], ['10 yrs', 10], ['All', 0]];
+$('presets').innerHTML = PRESETS.map(([l, y]) => `<button class="chip" data-y="${y}" aria-pressed="${y === 0}">${l}</button>`).join('');
+$('presets').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const y = +b.dataset.y; re.value = months.length - 1;
+  rs.value = y ? Math.max(0, months.length - 1 - y * 12) : 0;
+  [...$('presets').children].forEach(c => c.setAttribute('aria-pressed', c === b ? 'true' : 'false'));
+  drawChart();
+});
+const clearPreset = () => [...$('presets').children].forEach(c => c.setAttribute('aria-pressed', 'false'));
+rs.addEventListener('input', () => { if (+rs.value > +re.value - 6) rs.value = +re.value - 6; clearPreset(); drawChart(); });
+re.addEventListener('input', () => { if (+re.value < +rs.value + 6) re.value = +rs.value + 6; clearPreset(); drawChart(); });
+let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(drawChart, 150); });
+
+/* ---------- history page ---------- */
+function renderRegimeTable() {
+  const rows = [['Calm', 'Under 15%', '100% stocks', D.regShare.Calm], ['Normal', '15–25%', '80–100% stocks', D.regShare.Normal],
+                ['Choppy', '25–40%', '50–80% stocks, rest T-bills', D.regShare.Choppy], ['Stormy', '40% or more', 'Under 50% stocks, rest T-bills', D.regShare.Stormy]];
+  $('regime-table').innerHTML = `<thead><tr><th>Weather</th><th>QQQ swing</th><th>Invested</th><th>Days</th></tr></thead><tbody>` +
+    rows.map(([r, v, m, s]) => `<tr><td><span class="regime-cell" style="--reg:var(${REG[r]})">${r}</span></td><td>${v}</td><td style="white-space:normal">${m}</td><td>${s}%</td></tr>`).join('') + '</tbody>';
+}
+function renderYears() {
+  const beat = D.years.filter(y => y.plan > y.qqq).length;
+  $('years-summary').textContent = `The plan beat QQQ in ${beat} of ${D.years.length} years. 2011 starts in February; ${D.years[D.years.length - 1].y} runs to ${dateShort(D.asOf)}.`;
+  $('years').innerHTML = `<thead><tr><th>Year</th><th>QQQ</th><th>Plan</th><th>Difference</th></tr></thead><tbody>` +
+    D.years.slice().reverse().map(y => { const d = y.plan - y.qqq; return `<tr><td>${y.y}</td><td>${fmtPct(y.qqq)}</td><td><b>${fmtPct(y.plan)}</b></td><td class="${d >= 0 ? 'diff-pos' : 'diff-neg'}">${(d >= 0 ? '+' : '') + d.toFixed(1)} pts</td></tr>`; }).join('') + '</tbody>';
+}
+function renderPeriods() {
+  $('periods').innerHTML = `<thead><tr><th>Period</th><th>QQQ / yr</th><th>Plan / yr</th><th>QQQ worst drop</th><th>Plan worst drop</th></tr></thead><tbody>` +
+    D.periods.map(p => `<tr><td>${p.p}</td><td>${fmtPct(p.qqq)}</td><td><b>${fmtPct(p.plan)}</b></td><td>${p.qqqDD.toFixed(1)}%</td><td>${p.planDD.toFixed(1)}%</td></tr>`).join('') + '</tbody>';
+}
+let lv = 'changes';
+function renderLineups() {
+  const all = D.lineups.slice().reverse();
+  const rows = lv === 'changes' ? all.filter((l, k) => l.added.length || l.removed.length || k === all.length - 1) : all;
+  const nChanges = D.lineups.filter(l => l.added.length).length;
+  $('lineup-summary').textContent = `${D.lineups.length} quarterly checks since the start; the line-up changed ${nChanges} times. Changes trade at the first open after the quarter ends.`;
+  $('lineups').innerHTML = `<thead><tr><th>Quarter end</th><th style="text-align:left">In</th><th style="text-align:left">Out</th><th style="text-align:left">The eight (biggest first, % of stocks)</th></tr></thead><tbody>` +
+    rows.map(l => `<tr><td>${dateShort(l.q)}</td>
+      <td class="wrapcell">${l.added.map(t => `<span class="tag in" title="${nameOf(t)}">${t}</span>`).join('') || '<span class="note">–</span>'}</td>
+      <td class="wrapcell">${l.removed.map(t => `<span class="tag out" title="${nameOf(t)}">${t}</span>`).join('') || '<span class="note">–</span>'}</td>
+      <td class="wrapcell" style="min-width:320px">${l.stocks.map(([t, w]) => `<span class="tag plain" title="${nameOf(t)}">${t} <span class="note">${w.toFixed(0)}</span></span>`).join('')}</td></tr>`).join('') + '</tbody>';
+}
+document.querySelectorAll('[data-lv]').forEach(b => b.onclick = () => { lv = b.dataset.lv; document.querySelectorAll('[data-lv]').forEach(c => c.setAttribute('aria-pressed', c === b ? 'true' : 'false')); renderLineups(); });
+function renderLog() {
+  const Lg = D.log;
+  const years = [...new Set(Lg.map(e => e.d.slice(0, 4)))].reverse();
+  const sel = $('log-year'), cur = sel.value && years.includes(sel.value) ? sel.value : years[0];
+  sel.innerHTML = years.map(y => `<option value="${y}" ${y === cur ? 'selected' : ''}>${y}</option>`).join('');
+  const rows = Lg.filter(e => e.d.startsWith(cur)).reverse();
+  const perYr = (Lg.length / ((new Date(D.asOf) - new Date(Lg[0].d)) / (365.25 * 864e5))).toFixed(0);
+  $('log-summary').textContent = `${Lg.length} weather trades since February 2011, about ${perYr} a year, plus the quarterly line-up changes. ${rows.length} in ${cur}. Each trade happens at the market open after the signal; all eight stocks move together, keeping their weights.`;
+  $('log').innerHTML = `<thead><tr><th>Date</th><th>Weather</th><th>QQQ swing</th><th>Stocks held</th><th>T-bills</th></tr></thead><tbody>` +
+    rows.map(e => `<tr><td>${dateMd(e.d)}</td><td><span class="regime-cell" style="--reg:var(${REG[e.reg]})">${e.reg}</span></td><td>${e.vol}%</td>
+      <td>${Math.round(e.from * 100)}% <span class="arrow">→</span> <b>${Math.round(e.to * 100)}%</b></td><td>${Math.round((1 - e.to) * 100)}%</td></tr>`).join('') + '</tbody>';
+}
+$('log-year').addEventListener('change', renderLog);
+
+/* ---------- boot ---------- */
+renderWeather(); renderHoldings();
+renderRegimeTable(); renderYears(); renderPeriods(); renderLineups(); renderLog();
+route();
+</script>

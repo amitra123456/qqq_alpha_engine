@@ -2,6 +2,8 @@
 
 Hold QQQ in proportion to how calm the market is: each day the target exposure is 20% divided by QQQ's trailing 21-day realised volatility, capped at 1.5x. Exposure below 1.0x leaves the rest in T-bills; exposure above 1.0x moves part of the QQQ position into QLD (2x daily Nasdaq-100 ETF). No margin, no options, no stock picking.
 
+A second plan, the **Big Eight Weather Plan**, applies the same weather rule (no leverage) to the 8 largest Nasdaq-100 companies; see section 7. Both plans have a website in `site/` (section 8).
+
 ---
 
 ## 1. Verdict and weaknesses (read first)
@@ -153,3 +155,49 @@ python scripts/run_production_voltarget.py --capital 100000 --current-exposure 1
 ```
 
 `run_production_voltarget.py` needs to know the exposure you currently hold: pass `--current-exposure`, or your holdings as `--qqq-value/--qld-value/--cash-value`; otherwise it assumes the previous run's orders were filled. Live prices come from Alpaca if API keys are set in `.env`, otherwise from the cached files.
+
+---
+
+## 7. Second plan: Big Eight Weather Plan (no leverage)
+
+**Rules.** At each quarter-end, rank the true Nasdaq-100 members by market cap (close on/before the quarter-end × share count from SEC filings made on/before it; GOOG dropped, GOOGL carries all Alphabet shares; a stock needs 60 trading days of history). Hold the top 8 cap-weighted from the next open; weights drift between quarters. Invested fraction = min(1.0, 20% / QQQ 21-day volatility), the rest in T-bills; trade at the next open only on a 10-point change. 10 bps costs. Config: `big_eight` in `config/strategy_config.yaml`.
+
+**Results, Feb 2011 to Nov 11 2026** (`python scripts/run_big8_backtest.py`):
+
+| Period | Big Eight / yr | QQQ / yr | Big Eight worst drop | QQQ worst drop |
+|---|---|---|---|---|
+| Feb 2011 to latest | 19.8% | 18.2% | -34.2% | -35.1% |
+| 2011 to mid-2016 (never used in design) | 14.2% | 13.8% | -22.6% | -16.1% |
+| Mid-2016 to 2019 | 26.3% | 22.4% | -19.4% | -22.8% |
+| 2020 to 2022 | 6.6% | 7.9% | -33.7% | -35.1% |
+| 2023 to latest | 33.3% | 29.1% | -24.9% | -22.8% |
+
+Beat QQQ in 11 of 16 calendar years; about 8 weather trades a year plus quarterly line-up changes (25 changes in 64 quarters).
+
+**Weaknesses.** The edge comes from mega-caps outrunning the index, mostly after 2016. Only ~16 years of history, with no 2000–2002-style collapse of the largest names. The drawdown is about the same as QQQ's: the weather rule helps less on 8 stocks than on QQQ. Two data points are approximations: ADRs use fixed ADR-equivalent share counts, and SpaceX's 2026-09-30 count uses total class A + B shares because its XBRL filings carry no cover-page count.
+
+**Data and commands.**
+
+```text
+data/big8/quarterly_ranking.csv          every member's market cap and rank at each quarter-end (the line-ups)
+data/big8/prices/*.csv                   prices + dividends for every stock that ever made the top 8
+data/big8/pit_shares_2010_2026.csv       point-in-time share counts;  nasdaq100_membership_2010_2026.json  membership
+scripts/run_big8_backtest.py             backtest (numbers above)
+scripts/run_production_big8.py           daily signal:  --capital 10000 --current-invested 0.65 [--refresh-prices]
+scripts/update_big8_lineup.py            after each quarter-end:  --quarter-date 2026-12-31 [--dry-run]
+scripts/build_big8_ranking.py            rebuild the whole ranking from SEC shares + prices (--download fetches ~180 price files)
+tests/test_big8.py                       line-up rules, no look-ahead, no leverage, costs, deadband
+```
+
+---
+
+## 8. Website
+
+`site/` builds a three-page static site (dark theme): a front page comparing both plans, and one page per plan with today's weather, holdings, an investment calculator, a timeframe slider against QQQ, and the full rules and trade history.
+
+```bash
+python site/prepare_qqq.py && python site/prepare_big8.py && python site/build_site.py
+```
+
+The finished pages are written to `site/dist/` (`index.html`, `qqq.html`, `big8.html`) and can be uploaded to any static host. The pages show data as of the last build; rebuild after updating prices.
+

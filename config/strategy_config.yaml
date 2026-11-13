@@ -32,6 +32,28 @@ volatility_target:
   backtest_cash_series: "FRED_DTB3_LAGGED_1D"
 
 # ---------------------------------------------------------------------------
+# Second live plan: Big Eight Weather Plan (no leverage)
+# 8 largest Nasdaq-100 members by point-in-time market cap, cap-weighted, quarterly line-up;
+# invested fraction set by QQQ volatility, never above 100%, rest in T-bills.
+# ---------------------------------------------------------------------------
+big_eight:
+  top_n: 8
+  weighting_scheme: "market_cap_proportional"
+  reconstitution_cadence: "quarterly"
+  reconstitution_execution: "first_open_after_quarter_end"
+  excluded_dual_class_tickers: ["GOOG"]
+  signal_symbol: "QQQ"
+  target_vol: 0.20
+  max_exposure: 1.0
+  lookback_days: 21
+  rebalance_deadband: 0.10
+  tbill_etf: "SGOV"
+  tbill_etf_fallback: "BIL"
+  execution_timing: "next_open"
+  backtest_cost_bps: 10.0
+  backtest_start: "2011-02-01"
+
+# ---------------------------------------------------------------------------
 # Previous strategy v5.0.0 (reference only)
 # ---------------------------------------------------------------------------
 portfolio_rules:

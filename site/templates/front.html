@@ -1,0 +1,226 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Weather Plans</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+/* Front door: shared weather at the top, two plan cards side by side, then one honest comparison over the years both exist. */
+:root {
+  color-scheme: dark;
+  --bg: #0b111b; --surface: #131c2a; --surface-2: #1a2537; --surface-3: #22304a;
+  --fg: #e8eef7; --muted: #98a6bc; --line: #27354d;
+  --accent: #7aa7ff; --accent-soft: #1b2b49; --qqq: #8592a8; --big8: #3fc48e; --std: #7aa7ff;
+  --calm: #3fc48e; --normal: #6aa8f5; --choppy: #f2ad42; --stormy: #f07070;
+  --font-display: "Sora", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --radius: 16px;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.5; margin: 0; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+p { margin: 0; }
+b { font-weight: 600; }
+.num { font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+header { border-bottom: 1px solid var(--line); background: var(--surface); }
+header .wrap { display: flex; justify-content: space-between; align-items: baseline; padding-block: 14px; gap: 12px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; }
+header small { color: var(--muted); }
+main .wrap { display: grid; gap: 22px; padding-block: 36px 48px; }
+.hero { display: grid; gap: 12px; max-width: 760px; }
+.hero h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.12; font-weight: 700; }
+.hero p { color: var(--muted); font-size: 1.1rem; max-width: 62ch; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: grid; gap: 16px; min-width: 0; }
+.eyebrow { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.note { font-size: .88rem; color: var(--muted); }
+
+.weather { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; }
+@media (max-width: 640px) { .weather { grid-template-columns: 1fr; gap: 12px; } }
+.regime-word { font-family: var(--font-display); font-size: clamp(2.2rem, 6vw, 3rem); font-weight: 700; line-height: 1; color: var(--reg); }
+.weather p.big { font-size: 1.08rem; }
+.strip-bar { display: flex; height: 14px; border-radius: 6px; overflow: hidden; }
+.strip-bar i { flex: 1; }
+.strip-axis { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); margin-top: 6px; }
+
+.plans { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 860px) { .plans { grid-template-columns: 1fr; } }
+.plan { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: grid; gap: 16px; align-content: start; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; }
+.plan::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; border-radius: var(--radius) var(--radius) 0 0; background: var(--c); }
+.plan:hover { border-color: var(--c); transform: translateY(-2px); }
+.plan h2 { font-size: 1.45rem; font-weight: 700; }
+.plan .tagline { color: var(--muted); font-size: 1.02rem; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; }
+.kpi { background: var(--surface-2); border-radius: 12px; padding: 10px 12px; display: grid; gap: 2px; }
+.kpi span { font-size: .78rem; color: var(--muted); font-weight: 600; }
+.kpi b { font-family: var(--font-display); font-size: 1.2rem; }
+.kpi small { font-size: .78rem; color: var(--muted); }
+.mix { display: grid; gap: 6px; }
+.mixbar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--surface-2); gap: 2px; }
+.mixbar span { height: 100%; }
+ul.facts { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+ul.facts li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; color: var(--fg); font-size: .97rem; }
+ul.facts li::before { content: var(--ic); color: var(--icc); font-weight: 700; text-align: center; }
+ul.facts li.pro { --ic: "+"; --icc: var(--calm); }
+ul.facts li.con { --ic: "–"; --icc: var(--choppy); }
+.cta { justify-self: start; background: var(--c); color: #0b111b; font-weight: 700; padding: 10px 16px; border-radius: 10px; font-size: .97rem; }
+
+.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: .9rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 18px; height: 3px; border-radius: 2px; display: inline-block; }
+.chart { position: relative; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--bg); font-size: .82rem; font-weight: 600; padding: 6px 9px; border-radius: 8px; white-space: nowrap; transform: translate(-50%, -110%); }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 10px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; background: var(--c); }
+.scroll { overflow-x: auto; }
+.choose { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 760px) { .choose { grid-template-columns: 1fr; } }
+.choose > div { background: var(--surface-2); border-radius: 12px; padding: 14px; display: grid; gap: 4px; align-content: start; }
+.choose b { font-family: var(--font-display); }
+.choose p { color: var(--muted); font-size: .95rem; }
+footer { color: var(--muted); font-size: .85rem; }
+footer .wrap { padding-block: 0 40px; display: grid; gap: 8px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } .plan:hover { transform: none; } }
+</style>
+
+<header><div class="wrap"><span class="brand">Weather Plans</span><small id="asof"></small></div></header>
+<main><div class="wrap">
+  <section class="hero">
+    <h1>Two rule-based ways to own the Nasdaq's biggest companies.</h1>
+    <p>Both plans read the same market weather each evening. When the market is calm they stay invested; when it turns stormy they move part of the money into a Treasury bill fund. No stock research, no news, no guessing.</p>
+  </section>
+
+  <section class="panel" id="weather">
+    <span class="eyebrow">Today's market weather, shared by both plans</span>
+    <div class="weather">
+      <div class="regime-word" id="regime"></div>
+      <p class="big" id="weather-text"></p>
+    </div>
+    <div><div class="strip-bar" id="strip" role="img" aria-label="Daily market weather over the last 12 months"></div>
+      <div class="strip-axis"><span id="strip-start"></span><span>today</span></div></div>
+  </section>
+
+  <section class="plans">
+    <a class="plan" href="qqq.html" style="--c: var(--std)">
+      <span class="eyebrow">Plan 1 · one fund</span>
+      <h2>QQQ Weather Plan</h2>
+      <p class="tagline">Hold the whole Nasdaq-100 through one fund, QQQ. The Standard version adds a 2x fund in calm markets; the Simple version never goes above 100%.</p>
+      <div class="kpis" id="k-qqq"></div>
+      <div class="mix"><span class="note" id="mix-qqq-label"></span><div class="mixbar" id="mix-qqq"></div></div>
+      <ul class="facts">
+        <li class="pro">Longest test: since 1999, through the dot-com crash and 2008.</li>
+        <li class="pro">One or two funds. The easiest plan to follow.</li>
+        <li class="con">Standard trades about 26 times a year and uses a 2x fund when calm.</li>
+      </ul>
+      <span class="cta">Open the QQQ plan →</span>
+    </a>
+    <a class="plan" href="big8.html" style="--c: var(--big8)">
+      <span class="eyebrow">Plan 2 · eight stocks</span>
+      <h2>Big Eight Weather Plan</h2>
+      <p class="tagline">Own only the eight largest Nasdaq-100 companies, sized by company value and refreshed each quarter. Never uses borrowed money or 2x funds.</p>
+      <div class="kpis" id="k-big8"></div>
+      <div class="mix"><span class="note" id="mix-big8-label"></span><div class="mixbar" id="mix-big8"></div></div>
+      <ul class="facts">
+        <li class="pro">Highest growth since 2011, when the giants led the market.</li>
+        <li class="pro">About 8 weather trades a year plus a quarterly line-up check.</li>
+        <li class="con">Only 15 years of history. A bet that the biggest keep leading.</li>
+      </ul>
+      <span class="cta">Open the Big Eight plan →</span>
+    </a>
+  </section>
+
+  <section class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+      <h2 style="font-size:1.15rem">Side by side since February 2011</h2><span class="note">Growth of $10,000, after trading costs, dividends reinvested</span></div>
+    <div class="legend" id="legend"></div>
+    <div class="chart" id="chart"></div>
+    <div class="scroll"><table id="cmp"></table></div>
+    <p class="note">February 2011 is the earliest date both plans can be tested. The QQQ plan's full history from 1999 is on its own page. Simulated results, not real accounts; past results do not predict future ones.</p>
+  </section>
+
+  <section class="panel">
+    <h2 style="font-size:1.15rem">Which one is for me?</h2>
+    <div class="choose">
+      <div><b>I want the simplest thing</b><p>QQQ plan, Simple version. One fund plus a cash fund, about 8 trades a year.</p></div>
+      <div><b>I want the strongest crash protection</b><p>QQQ plan. It has been tested through 2000–2002 and 2008, cutting the worst loss from 83% to 55%.</p></div>
+      <div><b>I want the most growth and accept more risk</b><p>Big Eight plan. It led since 2011, but it depends on the largest companies continuing to lead.</p></div>
+    </div>
+  </section>
+</div></main>
+<footer><div class="wrap">
+  <p>Data as of the market close on <span id="asof-foot"></span>.</p>
+  <p>This site explains rules-based approaches for education. It is not personal financial advice. All investing involves risk, including loss of the money you invest. Consider your own situation or speak to a licensed adviser before investing.</p>
+</div></footer>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const $ = id => document.getElementById(id);
+const fmt$ = v => '$' + Math.round(v).toLocaleString('en-US');
+const pct = v => (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+const dt = s => new Date(s + 'T12:00:00');
+const dateLong = s => dt(s).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const dateShort = s => dt(s).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+const REG = { Calm: '--calm', Normal: '--normal', Choppy: '--choppy', Stormy: '--stormy' };
+const regOf = v => v >= 40 ? 'Stormy' : v >= 25 ? 'Choppy' : v >= 15 ? 'Normal' : 'Calm';
+
+$('asof').textContent = 'as of ' + dateShort(D.asOf);
+$('asof-foot').textContent = dateLong(D.asOf);
+$('weather').style.setProperty('--reg', `var(${REG[D.regime]})`);
+$('regime').textContent = D.regime;
+const inv = Math.round(D.big8Inv * 100);
+$('weather-text').textContent = `QQQ has been swinging about ${D.vol}% a year. ` +
+  (inv >= 100 ? 'Both plans are fully invested.' : `Both plans hold ${inv}% in stocks today and keep ${100 - inv}% in a Treasury bill fund.`);
+$('strip').innerHTML = D.volStrip.map(([d, v]) => `<i style="background:var(${REG[regOf(v)]})" title="${d}: ${regOf(v)} (${v}%)"></i>`).join('');
+$('strip-start').textContent = dateShort(D.volStrip[0][0]);
+
+const kpi = (label, val, sub) => `<div class="kpi"><span>${label}</span><b class="num">${val}</b><small>${sub}</small></div>`;
+const F = D.qqqFull, C = D.common;
+$('k-qqq').innerHTML = kpi('Yearly return', pct(F.s15), `QQQ ${pct(F.qqq)} · since 1999`) + kpi('Worst drop', F.s15dd.toFixed(0) + '%', `QQQ ${F.qqqdd.toFixed(0)}%`) + kpi('Trades / yr', '~' + D.qqqTrades.s15, `Simple: ~${D.qqqTrades.s10}`);
+$('k-big8').innerHTML = kpi('Yearly return', pct(C.plan.cagr), `QQQ ${pct(C.qqq.cagr)} · since 2011`) + kpi('Worst drop', C.plan.dd.toFixed(0) + '%', `QQQ ${C.qqq.dd.toFixed(0)}%`) + kpi('Trades / yr', '~' + D.big8Trades, '+ quarterly line-up');
+const n = D.qqqNow.s15;
+$('mix-qqq-label').textContent = `Today: ${n.QQQ}% QQQ${n.QLD ? `, ${n.QLD}% QLD` : ''}, ${n.SGOV}% T-bills`;
+$('mix-qqq').innerHTML = `<span style="width:${n.QQQ}%;background:var(--std)"></span><span style="width:${n.QLD}%;background:var(--choppy)"></span><span style="width:${n.SGOV}%;background:var(--qqq)"></span>`;
+$('mix-big8-label').textContent = `Today: ${inv}% in ${D.big8Top.join(', ')}; ${100 - inv}% T-bills`;
+$('mix-big8').innerHTML = `<span style="width:${inv}%;background:var(--big8)"></span><span style="width:${100 - inv}%;background:var(--qqq)"></span>`;
+
+const LINES = [['plan', 'Big Eight plan', 'var(--big8)', ''], ['s15', 'QQQ plan, Standard', 'var(--std)', ''], ['s10', 'QQQ plan, Simple', '#c792ff', '2 3'], ['qqq', 'Just holding QQQ', 'var(--qqq)', '5 4']];
+$('legend').innerHTML = LINES.map(([, l, c, da]) => `<span><i style="background:${c};${da ? 'opacity:.8' : ''}"></i>${l}</span>`).join('');
+$('cmp').innerHTML = `<thead><tr><th>Since Feb 2011</th><th>$10,000 became</th><th>Per year</th><th>Worst drop</th><th>Years beating QQQ</th></tr></thead><tbody>` +
+  LINES.map(([k, l, c]) => `<tr><td><span class="dot" style="--c:${c}"></span>${l}</td><td><b>${fmt$(C[k].end)}</b></td><td>${pct(C[k].cagr)}</td><td>${C[k].dd.toFixed(1)}%</td><td>${k === 'qqq' ? '–' : D.beat[k] + ' of ' + D.nYears}</td></tr>`).join('') + '</tbody>';
+
+function drawChart() {
+  const ch = D.chart, N = ch.d.length, W = 960, H = 300, L = 60, R = 16, T = 12, B = 28;
+  const all = LINES.flatMap(([k]) => ch[k]).map(v => v * 1e4), lo = Math.min(...all), hi = Math.max(...all);
+  const ymin = Math.log(lo * 0.95), ymax = Math.log(hi * 1.05);
+  const X = i => L + i / (N - 1) * (W - L - R), Y = v => T + (1 - (Math.log(v) - ymin) / (ymax - ymin)) * (H - T - B);
+  const ticks = [10000, 20000, 50000, 100000, 200000].filter(v => v >= lo * 0.95 && v <= hi * 1.05);
+  const xt = []; ch.d.forEach((d, i) => { if (d.slice(5, 7) === '01' && +d.slice(0, 4) % 2 === 0) xt.push([X(i), d.slice(0, 4)]); });
+  const path = k => ch[k].map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v * 1e4).toFixed(1)).join(' ');
+  $('chart').innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Growth of $10,000 for each plan since February 2011">
+    ${ticks.map(v => `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${L - 8}" y="${Y(v) + 4}" text-anchor="end" font-size="12" fill="var(--muted)">$${v / 1000}k</text>`).join('')}
+    ${xt.map(([x, t]) => `<text x="${x}" y="${H - 6}" text-anchor="middle" font-size="12" fill="var(--muted)">${t}</text>`).join('')}
+    ${LINES.slice().reverse().map(([k, , c, da]) => `<path d="${path(k)}" fill="none" stroke="${c}" stroke-width="${k === 'plan' || k === 's15' ? 2.6 : 2}" ${da ? `stroke-dasharray="${da}"` : ''}/>`).join('')}
+    ${LINES.map(([k, , c]) => `<circle cx="${X(N - 1)}" cy="${Y(ch[k][N - 1] * 1e4)}" r="4" fill="${c}"/>`).join('')}
+    <line id="hl" x1="0" x2="0" y1="${T}" y2="${H - B}" stroke="var(--muted)" visibility="hidden"/>
+    <rect x="${L}" y="${T}" width="${W - L - R}" height="${H - T - B}" fill="transparent"/></svg><div class="tip" id="tip" hidden></div>`;
+  const svg = $('chart').querySelector('svg'), tip = $('tip'), hl = $('hl');
+  svg.addEventListener('pointermove', ev => {
+    const r = svg.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * W;
+    const i = Math.max(0, Math.min(N - 1, Math.round((x - L) / (W - L - R) * (N - 1))));
+    hl.setAttribute('x1', X(i)); hl.setAttribute('x2', X(i)); hl.setAttribute('visibility', 'visible');
+    tip.hidden = false; tip.style.left = Math.min(Math.max(X(i) / W * r.width, 150), r.width - 150) + 'px';
+    tip.style.top = (Y(Math.max(...LINES.map(([k]) => ch[k][i])) * 1e4) / H * r.height) + 'px';
+    tip.textContent = `${dateShort(ch.d[i])} · Big 8 ${fmt$(ch.plan[i] * 1e4)} · Std ${fmt$(ch.s15[i] * 1e4)} · QQQ ${fmt$(ch.qqq[i] * 1e4)}`;
+  });
+  svg.addEventListener('pointerleave', () => { tip.hidden = true; hl.setAttribute('visibility', 'hidden'); });
+}
+drawChart();
+</script>
